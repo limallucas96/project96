@@ -1,0 +1,12 @@
+ext.versions = [
+        hilt: '2.42',
+]
+
+ext.libraries = [
+        hiltAndroid : "com.google.dagger:hilt-android:$versions.hilt",
+        hiltCompiler: "com.google.dagger:hilt-compiler:$versions.hilt"
+]
+
+ext.classpath = [
+        hilt: "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt",
+]

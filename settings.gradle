@@ -16,3 +16,4 @@ rootProject.name = "MVI96"
 include ':app'
 include ':feature-two'
 include ':feature-one'
+include ':core-data'
