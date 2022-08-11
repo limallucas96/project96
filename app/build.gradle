@@ -35,8 +35,6 @@ android {
 
 dependencies {
 
-    implementation project(path: ':feature-two')
-    implementation project(path: ':feature-one')
     implementation project(path: ':core-data')
 
     //Hilt

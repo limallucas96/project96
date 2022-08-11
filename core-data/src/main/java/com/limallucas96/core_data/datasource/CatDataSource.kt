@@ -1,4 +1,4 @@
-package com.limallucas96.core_data
+package com.limallucas96.core_data.datasource
 
 import retrofit2.http.GET
 
