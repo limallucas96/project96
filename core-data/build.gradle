@@ -35,10 +35,15 @@ dependencies {
 
     implementation project(path: ':core-network')
     implementation project(path: ':core-sharedpreferences')
+    implementation project(path: ':core-common')
+    implementation project(path: ':domain-model')
+    implementation project(path: ':data-model')
 
     //Hilt
     implementation rootProject.libraries.hiltAndroid
     kapt rootProject.libraries.hiltCompiler
+
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'

@@ -16,7 +16,7 @@ class SplashViewModel @Inject constructor(
 
     fun fetchCats() {
         viewModelScope.launch {
-            catRepository.getCats()
+            val cats = catRepository.getCats()
             sharedPreferencesRepository.putString("TEMP", "TEST")
             val a = sharedPreferencesRepository.getString("TEMP")
             println()

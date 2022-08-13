@@ -11,9 +11,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core-common" />
             <option value="$PROJECT_DIR$/core-data" />
             <option value="$PROJECT_DIR$/core-network" />
             <option value="$PROJECT_DIR$/core-sharedpreferences" />
+            <option value="$PROJECT_DIR$/data-model" />
+            <option value="$PROJECT_DIR$/domain-model" />
             <option value="$PROJECT_DIR$/feature-one" />
             <option value="$PROJECT_DIR$/feature-two" />
           </set>
