@@ -10,10 +10,10 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-abstract class RepositoryModules {
+interface RepositoryModules {
 
     @Singleton
     @Binds
-    abstract fun bindCatRepository(catRepositoryImp: CatRepositoryImp): CatRepository
+    fun bindsCatRepository(catRepositoryImp: CatRepositoryImp): CatRepository
 
 }

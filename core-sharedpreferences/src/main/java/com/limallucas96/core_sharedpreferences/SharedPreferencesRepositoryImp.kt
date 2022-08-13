@@ -1,11 +1,10 @@
-package com.limallucas96.core_data.repositories.sharedpreferences
+package com.limallucas96.core_sharedpreferences
 
 import android.content.Context
-import com.limallucas96.core_data.datasource.SharedPreferenceDataSource
 import javax.inject.Inject
 
 class SharedPreferencesRepositoryImp @Inject constructor(context: Context) :
-    SharedPreferenceDataSource {
+    SharedPreferences {
 
     private val sharedPreferences by lazy {
         context.getSharedPreferences("${context.packageName}_preferences", Context.MODE_PRIVATE)

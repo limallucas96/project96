@@ -1,6 +1,6 @@
-package com.limallucas96.core_data.datasource
+package com.limallucas96.core_sharedpreferences
 
-interface SharedPreferenceDataSource {
+interface SharedPreferences {
 
     fun getInt(key: String, default: Int = -1): Int
     fun getString(key: String, default: String? = null): String?

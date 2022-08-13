@@ -1,18 +1,12 @@
-package com.limallucas96.core_data.di
+package com.limallucas96.core_network.di
 
-import android.content.Context
 import com.google.gson.Gson
-import com.limallucas96.core_data.datasource.CatDataSource
-import com.limallucas96.core_data.datasource.SharedPreferenceDataSource
-import com.limallucas96.core_data.repositories.sharedpreferences.SharedPreferencesRepositoryImp
-import dagger.Binds
+import com.limallucas96.core_network.datasources.CatDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import org.intellij.lang.annotations.PrintFormat
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -20,11 +14,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object CoreDataModules {
+object CoreNetworkModules {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): CatDataSource {
+    fun providesRetrofit(okHttpClient: OkHttpClient): CatDataSource {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://api.thecatapi.com/v1/")
@@ -35,7 +29,7 @@ object CoreDataModules {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
+    fun providesOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
@@ -45,14 +39,8 @@ object CoreDataModules {
 
     @Singleton
     @Provides
-    fun provideGson(): Gson {
+    fun providesGson(): Gson {
         return Gson()
-    }
-
-    @Singleton
-    @Provides
-    fun bindSharedPreferencesRepository(@ApplicationContext context: Context): SharedPreferenceDataSource {
-        return SharedPreferencesRepositoryImp(context)
     }
 
 }
