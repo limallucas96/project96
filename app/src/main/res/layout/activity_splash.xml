@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".SplashActivity">
+    tools:context=".splash.SplashActivity">
 
     <com.limallucas96.uikit.views.MyButton
         android:id="@+id/button_featureOne"

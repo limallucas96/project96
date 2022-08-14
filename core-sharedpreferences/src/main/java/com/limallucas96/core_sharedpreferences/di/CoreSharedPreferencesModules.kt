@@ -1,8 +1,8 @@
 package com.limallucas96.core_sharedpreferences.di
 
 import android.content.Context
-import com.limallucas96.core_sharedpreferences.SharedPreferences
-import com.limallucas96.core_sharedpreferences.SharedPreferencesRepositoryImp
+import com.limallucas96.core_sharedpreferences.sharedpreferences.AppSharedPreferences
+import com.limallucas96.core_sharedpreferences.sharedpreferences.AppSharedPreferencesRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +16,7 @@ object CoreSharedPreferencesModules {
 
     @Provides
     @Singleton
-    fun provideSharedPreference(@ApplicationContext context: Context) : SharedPreferences {
-        return SharedPreferencesRepositoryImp(context)
+    fun provideSharedPreference(@ApplicationContext context: Context) : AppSharedPreferences {
+        return AppSharedPreferencesRepositoryImp(context)
     }
 }

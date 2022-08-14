@@ -1,9 +1,10 @@
-package com.limallucas96.mvi96
+package com.limallucas96.mvi96.splash
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.limallucas96.mvi96.R
 import com.limallucas96.navigator.featureone.FeatureOneNavigator
 import com.limallucas96.navigator.featuretwo.FeatureTwoNavigator
 import dagger.hilt.android.AndroidEntryPoint

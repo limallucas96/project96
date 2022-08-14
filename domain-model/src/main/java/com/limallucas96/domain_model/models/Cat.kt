@@ -1,4 +1,4 @@
-package com.limallucas96.domain_model
+package com.limallucas96.domain_model.models
 
 data class Cat (
     val name: String,

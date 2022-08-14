@@ -1,6 +1,6 @@
-package com.limallucas96.core_sharedpreferences
+package com.limallucas96.core_sharedpreferences.sharedpreferences
 
-interface SharedPreferences {
+interface AppSharedPreferences {
 
     fun getInt(key: String, default: Int = -1): Int
     fun getString(key: String, default: String? = null): String?
