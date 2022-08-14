@@ -32,8 +32,9 @@ android {
 }
 
 dependencies {
-
-    implementation project(path: ':uikit')
+    \
+    implementation project(path: ':feature-one')
+    implementation project(path: ':feature-two')
 
     //Hilt
     implementation rootProject.libraries.hiltAndroid

@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/domain-model" />
             <option value="$PROJECT_DIR$/feature-one" />
             <option value="$PROJECT_DIR$/feature-two" />
+            <option value="$PROJECT_DIR$/navigator" />
             <option value="$PROJECT_DIR$/uikit" />
           </set>
         </option>
