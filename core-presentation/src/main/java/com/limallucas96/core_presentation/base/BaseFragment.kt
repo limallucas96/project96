@@ -12,9 +12,13 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     private var _binding: VB? = null
 
     protected val binding: VB
-        get() = _binding ?: throw IllegalStateException("reference to binding made before onCreateView or after onDestroyView.")
+        get() = _binding
+            ?: throw IllegalStateException("reference to binding made before onCreateView or after onDestroyView.")
+
 
     abstract fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+
+    abstract fun onViewReady()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +27,11 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     ): View {
         _binding = inflateBinding(inflater, container)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        onViewReady()
     }
 
     override fun onDestroyView() {

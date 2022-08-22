@@ -14,13 +14,10 @@ abstract class BaseMVIFragment<VB : ViewBinding, UIEvent : ViewEvent, UIViewStat
 
     protected abstract fun onSideEffectReceived(sideEffect: SideEffect)
 
-    protected abstract fun onViewReady()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observeSideEffects()
         observeViewState()
-        onViewReady()
     }
 
     private fun observeSideEffects() {

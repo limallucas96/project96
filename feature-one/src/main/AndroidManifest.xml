@@ -4,7 +4,11 @@
 
     <application>
 
-        <activity android:name=".entrypoint.FeatureOneEntryPointActivity" />
+        <activity
+            android:name=".entrypoint.FeatureOneEntryPointActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
 
     </application>
 

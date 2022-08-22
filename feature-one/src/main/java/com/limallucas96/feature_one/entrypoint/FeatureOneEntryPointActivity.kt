@@ -3,7 +3,7 @@ package com.limallucas96.feature_one.entrypoint
 import androidx.activity.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVINavigationActivity
 import com.limallucas96.core_presentation.mvi.SideEffect
-import com.limallucas96.feature_one.featureone.FeatureOneFragment
+import com.limallucas96.feature_one.petprofile.FeatureOnePetProfileFragment
 
 class FeatureOneEntryPointActivity :
     BaseMVINavigationActivity<FeatureOneEntryPointEvents, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffects>() {
@@ -21,7 +21,7 @@ class FeatureOneEntryPointActivity :
     override fun onSideEffectReceived(sideEffect: SideEffect) {
         when (sideEffect) {
             is FeatureOneEntryPointSideEffects.NavigateToFeatureOneFragment -> {
-                navigateTo(FeatureOneFragment.newInstance(), sideEffect.backStack)
+                navigateTo(FeatureOnePetProfileFragment.newInstance(), sideEffect.backStack)
             }
         }
     }
