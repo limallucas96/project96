@@ -1,4 +1,4 @@
-package com.limallucas96.feature_one
+package com.limallucas96.feature_one.featureone
 
 import com.limallucas96.core_presentation.mvi.SideEffect
 import com.limallucas96.core_presentation.mvi.ViewEvent

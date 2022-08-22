@@ -20,7 +20,7 @@ abstract class BaseMVIViewModel<UIEvent : ViewEvent, UIViewState : ViewState, UI
     private val event = _event.asSharedFlow()
 
     private val _sideEffect: Channel<SideEffect> = Channel()
-    val sideEffect = _sideEffect.receiveAsFlow()
+    val sideEffect = _sideEffect.receiveAsFlow() // TODO other besides base activies can not see this
 
     init {
         subscribeEvents()
