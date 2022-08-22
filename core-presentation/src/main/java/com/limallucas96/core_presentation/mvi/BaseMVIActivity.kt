@@ -30,7 +30,7 @@ abstract class BaseMVIActivity<VB : ViewBinding, UIEvent : ViewEvent, UIViewStat
 
     private fun observeViewState() {
         lifecycleScope.launchWhenStarted {
-            viewModel.uiState.collect { viewState ->
+            viewModel.viewState.collect { viewState ->
                 onViewStateUpdated(viewState)
             }
         }

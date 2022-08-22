@@ -6,15 +6,15 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-abstract class BaseMVIViewModel<UIEvent : ViewEvent, UIViewState : ViewState, SideEffect : SideEffect> :
+abstract class BaseMVIViewModel<UIEvent : ViewEvent, UIViewState : ViewState, UISideEffect : SideEffect> :
     ViewModel() {
 
-    private val initialState: UIViewState by lazy { createInitialState() }
+    private val initialViewState: UIViewState by lazy { createInitialViewState() }
 
-    private val currentState: UIViewState get() = uiState.value
+    private val currentState: UIViewState get() = viewState.value
 
-    private val _uiState: MutableStateFlow<UIViewState> = MutableStateFlow(initialState)
-    val uiState = _uiState.asStateFlow()
+    private val _viewState: MutableStateFlow<UIViewState> = MutableStateFlow(initialViewState)
+    val viewState = _viewState.asStateFlow()
 
     private val _event: MutableSharedFlow<UIEvent> = MutableSharedFlow()
     private val event = _event.asSharedFlow()
@@ -26,17 +26,17 @@ abstract class BaseMVIViewModel<UIEvent : ViewEvent, UIViewState : ViewState, Si
         subscribeEvents()
     }
 
-    abstract fun createInitialState(): UIViewState
+    abstract fun createInitialViewState(): UIViewState
 
     abstract fun handleEvent(event: UIEvent)
 
     protected fun setState(reduce: UIViewState.() -> UIViewState) {
         val newState = currentState.reduce()
-        _uiState.value = newState
+        _viewState.value = newState
     }
 
-    protected fun setSideEffect(effect: SideEffect) {
-        val newSideEffect = effect
+    protected fun setSideEffect(sideEffect: SideEffect) {
+        val newSideEffect = sideEffect
         viewModelScope.launch { _sideEffect.send(newSideEffect) }
     }
 
