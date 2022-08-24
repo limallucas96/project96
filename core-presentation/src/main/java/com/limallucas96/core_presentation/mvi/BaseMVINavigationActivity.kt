@@ -5,8 +5,8 @@ import com.limallucas96.core_presentation.R
 import com.limallucas96.core_presentation.databinding.ActivityBaseNavigationBinding
 import com.limallucas96.core_presentation.extensions.*
 
-abstract class BaseMVINavigationActivity<UIEvent : ViewEvent, UIViewState : ViewState, UISideEffect : SideEffect> :
-    BaseMVIActivity<ActivityBaseNavigationBinding, UIEvent, UIViewState, UISideEffect>() {
+abstract class BaseMVINavigationActivity<UserAction : ViewAction, UIViewState : ViewState, UISideEffect : SideEffect> :
+    BaseMVIActivity<ActivityBaseNavigationBinding, UserAction, UIViewState, UISideEffect>() {
 
     override fun inflateBinding() = ActivityBaseNavigationBinding.inflate(layoutInflater)
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.limallucas96.core_presentation.base.BaseActivity
 
-abstract class BaseMVIActivity<VB : ViewBinding, UIEvent : ViewEvent, UIViewState : ViewState, UISideEffect : SideEffect> :
+abstract class BaseMVIActivity<VB : ViewBinding, UIEvent : ViewAction, UIViewState : ViewState, UISideEffect : SideEffect> :
     BaseActivity<VB>() {
 
     protected abstract val viewModel: BaseMVIViewModel<UIEvent, UIViewState, UISideEffect>
@@ -18,12 +18,12 @@ abstract class BaseMVIActivity<VB : ViewBinding, UIEvent : ViewEvent, UIViewStat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        observeSideEffects()
+        observeSideEffect()
         observeViewState()
         onViewReady()
     }
 
-    private fun observeSideEffects() {
+    private fun observeSideEffect() {
         lifecycleScope.launchWhenStarted {
             viewModel.sideEffect.collect { sideEffect ->
                 onSideEffectReceived(sideEffect)

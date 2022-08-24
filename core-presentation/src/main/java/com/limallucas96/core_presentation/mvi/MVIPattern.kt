@@ -2,6 +2,6 @@ package com.limallucas96.core_presentation.mvi
 
 interface ViewState
 
-interface ViewEvent
+interface ViewAction
 
 interface SideEffect

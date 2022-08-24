@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CatPickerFragment :
-    BaseMVINavigationFragment<FragmentCatPickerBinding, CatPickerEvents, CatPickerViewState, CatPickerSideEffects>() {
+    BaseMVINavigationFragment<FragmentCatPickerBinding, CatPickerAction, CatPickerViewState, CatPickerSideEffect>() {
 
     override val viewModel: CatPickerViewModel by viewModels()
 
@@ -28,14 +28,14 @@ class CatPickerFragment :
         return FragmentCatPickerBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewStateUpdated(viewState: CatPickerViewState) {
+    override fun renderViewState(viewState: CatPickerViewState) {
         handleViewState(viewState)
         setupCatPhoto(viewState.catUrlPhoto)
     }
 
-    override fun onSideEffectReceived(sideEffect: CatPickerSideEffects) {
+    override fun handleSideEffect(sideEffect: CatPickerSideEffect) {
         when (sideEffect) {
-            is CatPickerSideEffects.NavigateToCatSummary -> {
+            is CatPickerSideEffect.NavigateToCatSummary -> {
                 navigateTo(
                     CatSummaryFragment.newInstance(
                         sideEffect.catName,
@@ -50,20 +50,20 @@ class CatPickerFragment :
 
     override fun onViewReady() {
         setupListeners()
-        viewModel.setEvent(CatPickerEvents.InitView(catName, catAge))
-        viewModel.setEvent(CatPickerEvents.ViewScreen)
+        viewModel.dispatch(CatPickerAction.InitView(catName, catAge))
+        viewModel.dispatch(CatPickerAction.ViewScreen)
     }
 
     private fun setupListeners() {
         binding.run {
             buttonChooseCat.setOnClickListener {
-                viewModel.setEvent(CatPickerEvents.ButtonChooseCatClick)
+                viewModel.dispatch(CatPickerAction.ButtonChooseCatClick)
             }
             buttonShortNewCat.setOnClickListener {
-                viewModel.setEvent(CatPickerEvents.ButtonShortNewCat)
+                viewModel.dispatch(CatPickerAction.ButtonShortNewCat)
             }
             textViewRetry.setOnClickListener {
-                viewModel.setEvent(CatPickerEvents.Retry)
+                viewModel.dispatch(CatPickerAction.Retry)
             }
         }
     }

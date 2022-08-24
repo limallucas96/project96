@@ -3,24 +3,24 @@ package com.limallucas96.feature_one.catprofile
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 
 class CatProfileViewModel :
-    BaseMVIViewModel<CatProfileEvents, CatProfileViewState, CatProfileSideEffects>() {
+    BaseMVIViewModel<CatProfileAction, CatProfileViewState, CatProfileSideEffect>() {
 
     override fun createInitialViewState() = CatProfileViewState()
 
-    override fun handleEvent(
-        event: CatProfileEvents,
+    override fun handleUserAction(
+        event: CatProfileAction,
         currentState: CatProfileViewState
     ) {
         when (event) {
-            is CatProfileEvents.OnCatNameChanged -> {
+            is CatProfileAction.OnCatNameChanged -> {
                 validateCatProfile(currentState.copy(catName = event.catName))
             }
-            is CatProfileEvents.OnCatAgeChanged -> {
+            is CatProfileAction.OnCatAgeChanged -> {
                 validateCatProfile(currentState.copy(catAge = event.catAge))
             }
-            CatProfileEvents.ButtonContinueClick -> {
-                setSideEffect(
-                    CatProfileSideEffects.NavigateToCatPicker(
+            CatProfileAction.ButtonContinueClick -> {
+                emitSideEffect(
+                    CatProfileSideEffect.NavigateToCatPicker(
                         currentState.catName,
                         currentState.catAge,
                         CAT_PROFILE_BACK_STACK

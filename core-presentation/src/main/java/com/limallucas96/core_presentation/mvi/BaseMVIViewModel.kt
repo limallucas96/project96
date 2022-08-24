@@ -6,7 +6,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-abstract class BaseMVIViewModel<UIEvent : ViewEvent, UIViewState : ViewState, UISideEffect : SideEffect> :
+abstract class BaseMVIViewModel<UserAction : ViewAction, UIViewState : ViewState, UISideEffect : SideEffect> :
     ViewModel() {
 
     private val initialViewState: UIViewState by lazy { createInitialViewState() }
@@ -16,37 +16,36 @@ abstract class BaseMVIViewModel<UIEvent : ViewEvent, UIViewState : ViewState, UI
     private val _viewState: MutableStateFlow<UIViewState> = MutableStateFlow(initialViewState)
     val viewState = _viewState.asStateFlow()
 
-    private val _event: MutableSharedFlow<UIEvent> = MutableSharedFlow()
-    private val event = _event.asSharedFlow()
+    private val _action: MutableSharedFlow<UserAction> = MutableSharedFlow()
+    private val action = _action.asSharedFlow()
 
     private val _sideEffect: Channel<UISideEffect> = Channel()
-    val sideEffect = _sideEffect.receiveAsFlow() // TODO other besides base activies can not see this
+    val sideEffect = _sideEffect.receiveAsFlow()
 
     init {
-        subscribeEvents()
+        observeActions()
     }
 
     abstract fun createInitialViewState(): UIViewState
 
-    abstract fun handleEvent(event: UIEvent, currentState: UIViewState)
+    abstract fun handleUserAction(event: UserAction, currentState: UIViewState)
 
     protected fun updateViewState(reduce: UIViewState.() -> UIViewState) {
         val newState = currentState.reduce()
         _viewState.value = newState
     }
 
-    protected fun setSideEffect(sideEffect: UISideEffect) {
+    protected fun emitSideEffect(sideEffect: UISideEffect) {
         val newSideEffect = sideEffect
         viewModelScope.launch { _sideEffect.send(newSideEffect) }
     }
 
-    private fun subscribeEvents() {
-        viewModelScope.launch { event.collect { handleEvent(it, currentState) } }
+    private fun observeActions() {
+        viewModelScope.launch { action.collect { handleUserAction(it, currentState) } }
     }
 
-    fun setEvent(event: UIEvent) {
-        val newEvent = event
-        viewModelScope.launch { _event.emit(newEvent) }
+    fun dispatch(action: UserAction) {
+        viewModelScope.launch { _action.emit(action) }
     }
 
 }

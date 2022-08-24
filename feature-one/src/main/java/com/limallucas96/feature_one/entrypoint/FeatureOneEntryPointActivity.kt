@@ -7,21 +7,21 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FeatureOneEntryPointActivity :
-    BaseMVINavigationActivity<FeatureOneEntryPointEvents, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffects>() {
+    BaseMVINavigationActivity<FeatureOneEntryPointAction, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffect>() {
 
     override val viewModel: FeatureOneEntryPointViewModel by viewModels()
 
     override fun onViewReady() {
-        viewModel.setEvent(FeatureOneEntryPointEvents.ViewScreen)
+        viewModel.dispatch(FeatureOneEntryPointAction.ViewScreen)
     }
 
     override fun onViewStateUpdated(viewState: FeatureOneEntryPointViewState) {
         // nothing to do here
     }
 
-    override fun onSideEffectReceived(sideEffect: FeatureOneEntryPointSideEffects) {
+    override fun onSideEffectReceived(sideEffect: FeatureOneEntryPointSideEffect) {
         when (sideEffect) {
-            is FeatureOneEntryPointSideEffects.NavigateToFeatureOneFragment -> {
+            is FeatureOneEntryPointSideEffect.NavigateToFeatureOneFragment -> {
                 navigateTo(CatProfileFragment.newInstance(), sideEffect.backStack)
             }
         }

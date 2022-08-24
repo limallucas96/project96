@@ -1,7 +1,7 @@
 package com.limallucas96.feature_one.catsummary
 
 import com.limallucas96.core_presentation.mvi.SideEffect
-import com.limallucas96.core_presentation.mvi.ViewEvent
+import com.limallucas96.core_presentation.mvi.ViewAction
 import com.limallucas96.core_presentation.mvi.ViewState
 
 
@@ -10,20 +10,20 @@ data class CatSummaryViewState(
     val catPhotoUrl: String = ""
 ) : ViewState
 
-sealed class CatSummaryEvents : ViewEvent {
+sealed class CatSummaryAction : ViewAction {
     data class ViewScreen(
         val catName: String,
         val catAge: String,
         val catPhotoUrl: String
-    ) : CatSummaryEvents()
+    ) : CatSummaryAction()
 
-    object ButtonGoToHomeClick : CatSummaryEvents()
-    object ButtonGoToCatProfileClick : CatSummaryEvents()
+    object ButtonGoToHomeClick : CatSummaryAction()
+    object ButtonGoToCatProfileClick : CatSummaryAction()
 }
 
-sealed class CatSummarySideEffects : SideEffect {
-    object NavigateToHome : CatSummarySideEffects()
+sealed class CatSummarySideEffect : SideEffect {
+    object NavigateToHome : CatSummarySideEffect()
     data class NavigateToCatProfile(
         val clearBackStack: Boolean
-    ) : CatSummarySideEffects()
+    ) : CatSummarySideEffect()
 }

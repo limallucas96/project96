@@ -10,7 +10,7 @@ import com.limallucas96.feature_one.databinding.FragmentCatProfileBinding
 
 
 class CatProfileFragment :
-    BaseMVINavigationFragment<FragmentCatProfileBinding, CatProfileEvents, CatProfileViewState, CatProfileSideEffects>() {
+    BaseMVINavigationFragment<FragmentCatProfileBinding, CatProfileAction, CatProfileViewState, CatProfileSideEffect>() {
 
     override val viewModel: CatProfileViewModel by viewModels()
 
@@ -21,13 +21,13 @@ class CatProfileFragment :
         return FragmentCatProfileBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewStateUpdated(viewState: CatProfileViewState) {
+    override fun renderViewState(viewState: CatProfileViewState) {
         binding.buttonContinue.isEnabled = viewState.isContinueButtonEnable
     }
 
-    override fun onSideEffectReceived(sideEffect: CatProfileSideEffects) {
+    override fun handleSideEffect(sideEffect: CatProfileSideEffect) {
         when (sideEffect) {
-            is CatProfileSideEffects.NavigateToCatPicker -> {
+            is CatProfileSideEffect.NavigateToCatPicker -> {
                 navigateTo(
                     CatPickerFragment.newInstance(sideEffect.catName, sideEffect.catAge),
                     sideEffect.backStack
@@ -43,13 +43,13 @@ class CatProfileFragment :
     private fun setupListeners() {
         binding.run {
             editTextCatName.doOnTextChanged { text, _, _, _ ->
-                viewModel.setEvent(CatProfileEvents.OnCatNameChanged(text.toString()))
+                viewModel.dispatch(CatProfileAction.OnCatNameChanged(text.toString()))
             }
             editTextCatAge.doOnTextChanged { text, _, _, _ ->
-                viewModel.setEvent(CatProfileEvents.OnCatAgeChanged(text.toString()))
+                viewModel.dispatch(CatProfileAction.OnCatAgeChanged(text.toString()))
             }
             buttonContinue.setOnClickListener {
-                viewModel.setEvent(CatProfileEvents.ButtonContinueClick)
+                viewModel.dispatch(CatProfileAction.ButtonContinueClick)
             }
         }
     }

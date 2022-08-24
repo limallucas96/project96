@@ -12,7 +12,7 @@ import com.limallucas96.uikit.extensions.loadUrl
 import com.limallucas96.uikit.extensions.withArgs
 
 class CatSummaryFragment :
-    BaseMVINavigationFragment<FragmentCatSummaryBinding, CatSummaryEvents, CatSummaryViewState, CatSummarySideEffects>() {
+    BaseMVINavigationFragment<FragmentCatSummaryBinding, CatSummaryAction, CatSummaryViewState, CatSummarySideEffect>() {
 
     override val viewModel: CatSummaryViewModel by viewModels()
 
@@ -27,20 +27,20 @@ class CatSummaryFragment :
         return FragmentCatSummaryBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewStateUpdated(viewState: CatSummaryViewState) {
+    override fun renderViewState(viewState: CatSummaryViewState) {
         binding.run {
             textViewCatSummary.text = viewState.catSummary
             activity?.let { context -> imageViewCat.loadUrl(context, viewState.catPhotoUrl) }
         }
     }
 
-    override fun onSideEffectReceived(sideEffect: CatSummarySideEffects) {
+    override fun handleSideEffect(sideEffect: CatSummarySideEffect) {
         when (sideEffect) {
-            CatSummarySideEffects.NavigateToHome -> {
+            CatSummarySideEffect.NavigateToHome -> {
                 // TODO Navigation to home or splash
                 Toast.makeText(requireContext(), "NavigateToHome", Toast.LENGTH_SHORT).show()
             }
-            is CatSummarySideEffects.NavigateToCatProfile -> {
+            is CatSummarySideEffect.NavigateToCatProfile -> {
                 navigateTo(
                     CatProfileFragment.newInstance(),
                     clearStack = sideEffect.clearBackStack
@@ -51,16 +51,16 @@ class CatSummaryFragment :
 
     override fun onViewReady() {
         setupListeners()
-        viewModel.setEvent(CatSummaryEvents.ViewScreen(catName, catAge, catPhotoUrl))
+        viewModel.dispatch(CatSummaryAction.ViewScreen(catName, catAge, catPhotoUrl))
     }
 
     private fun setupListeners() {
         binding.run {
             buttonGoToHome.setOnClickListener {
-                viewModel.setEvent(CatSummaryEvents.ButtonGoToHomeClick)
+                viewModel.dispatch(CatSummaryAction.ButtonGoToHomeClick)
             }
             buttonReDoMyCat.setOnClickListener {
-                viewModel.setEvent(CatSummaryEvents.ButtonGoToCatProfileClick)
+                viewModel.dispatch(CatSummaryAction.ButtonGoToCatProfileClick)
             }
         }
     }

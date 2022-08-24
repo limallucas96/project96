@@ -3,23 +3,23 @@ package com.limallucas96.feature_one.catsummary
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 
 class CatSummaryViewModel :
-    BaseMVIViewModel<CatSummaryEvents, CatSummaryViewState, CatSummarySideEffects>() {
+    BaseMVIViewModel<CatSummaryAction, CatSummaryViewState, CatSummarySideEffect>() {
 
     override fun createInitialViewState() = CatSummaryViewState()
 
-    override fun handleEvent(event: CatSummaryEvents, currentState: CatSummaryViewState) {
+    override fun handleUserAction(event: CatSummaryAction, currentState: CatSummaryViewState) {
         when (event) {
-            CatSummaryEvents.ButtonGoToHomeClick -> {
-                setSideEffect(CatSummarySideEffects.NavigateToHome)
+            CatSummaryAction.ButtonGoToHomeClick -> {
+                emitSideEffect(CatSummarySideEffect.NavigateToHome)
             }
-            CatSummaryEvents.ButtonGoToCatProfileClick -> {
-                setSideEffect(
-                    CatSummarySideEffects.NavigateToCatProfile(
+            CatSummaryAction.ButtonGoToCatProfileClick -> {
+                emitSideEffect(
+                    CatSummarySideEffect.NavigateToCatProfile(
                         clearBackStack = true
                     )
                 )
             }
-            is CatSummaryEvents.ViewScreen -> {
+            is CatSummaryAction.ViewScreen -> {
                 updateViewState {
                     copy(
                         catSummary = "${event.catName}\n${event.catAge}\n",

@@ -4,39 +4,34 @@ import androidx.lifecycle.viewModelScope
 import com.limallucas96.core_data.repositories.cat.CatRepository
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.fold
-import kotlinx.coroutines.flow.merge
-import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CatPickerViewModel @Inject constructor(
     private val catRepository: CatRepository
-) :
-    BaseMVIViewModel<CatPickerEvents, CatPickerViewState, CatPickerSideEffects>() {
+) : BaseMVIViewModel<CatPickerAction, CatPickerViewState, CatPickerSideEffect>() {
 
     override fun createInitialViewState() = CatPickerViewState()
 
-    override fun handleEvent(
-        event: CatPickerEvents,
+    override fun handleUserAction(
+        event: CatPickerAction,
         currentState: CatPickerViewState
     ) {
         when (event) {
-            CatPickerEvents.ViewScreen,
-            CatPickerEvents.ButtonShortNewCat,
-            CatPickerEvents.Retry -> {
+            CatPickerAction.ViewScreen,
+            CatPickerAction.ButtonShortNewCat,
+            CatPickerAction.Retry -> {
                 fetchCats()
             }
-            CatPickerEvents.ButtonChooseCatClick -> {
+            CatPickerAction.ButtonChooseCatClick -> {
                 navigateToCatSummary(
                     currentState.catName,
                     currentState.catAge,
                     currentState.catUrlPhoto
                 )
             }
-            is CatPickerEvents.InitView -> {
+            is CatPickerAction.InitView -> {
                 updateViewState { copy(catName = event.catName, catAge = event.catAge) }
             }
         }
@@ -58,8 +53,8 @@ class CatPickerViewModel @Inject constructor(
     }
 
     private fun navigateToCatSummary(catName: String, catAge: String, catPhotoUrl: String) {
-        setSideEffect(
-            CatPickerSideEffects.NavigateToCatSummary(
+        emitSideEffect(
+            CatPickerSideEffect.NavigateToCatSummary(
                 catName = catName,
                 catAge = catAge,
                 catPhotoUrl = catPhotoUrl,

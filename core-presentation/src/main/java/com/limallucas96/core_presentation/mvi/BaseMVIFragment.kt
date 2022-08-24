@@ -5,25 +5,25 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.limallucas96.core_presentation.base.BaseFragment
 
-abstract class BaseMVIFragment<VB : ViewBinding, UIEvent : ViewEvent, UIViewState : ViewState, UISideEffect : SideEffect> :
+abstract class BaseMVIFragment<VB : ViewBinding, UserAction : ViewAction, UIViewState : ViewState, UISideEffect : SideEffect> :
     BaseFragment<VB>() {
 
-    protected abstract val viewModel: BaseMVIViewModel<UIEvent, UIViewState, UISideEffect>
+    protected abstract val viewModel: BaseMVIViewModel<UserAction, UIViewState, UISideEffect>
 
-    protected abstract fun onViewStateUpdated(viewState: UIViewState)
+    protected abstract fun renderViewState(viewState: UIViewState)
 
-    protected abstract fun onSideEffectReceived(sideEffect: UISideEffect)
+    protected abstract fun handleSideEffect(sideEffect: UISideEffect)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        observeSideEffects()
+        observeSideEffect()
         observeViewState()
     }
 
-    private fun observeSideEffects() {
+    private fun observeSideEffect() {
         lifecycleScope.launchWhenStarted {
             viewModel.sideEffect.collect { sideEffect ->
-                onSideEffectReceived(sideEffect)
+                handleSideEffect(sideEffect)
             }
         }
     }
@@ -31,7 +31,7 @@ abstract class BaseMVIFragment<VB : ViewBinding, UIEvent : ViewEvent, UIViewStat
     private fun observeViewState() {
         lifecycleScope.launchWhenStarted {
             viewModel.viewState.collect { viewState ->
-                onViewStateUpdated(viewState)
+                renderViewState(viewState)
             }
         }
     }

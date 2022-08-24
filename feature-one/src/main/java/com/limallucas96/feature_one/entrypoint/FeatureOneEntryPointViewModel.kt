@@ -3,18 +3,18 @@ package com.limallucas96.feature_one.entrypoint
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 
 class FeatureOneEntryPointViewModel :
-    BaseMVIViewModel<FeatureOneEntryPointEvents, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffects>() {
+    BaseMVIViewModel<FeatureOneEntryPointAction, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffect>() {
 
     override fun createInitialViewState() = FeatureOneEntryPointViewState()
 
-    override fun handleEvent(
-        event: FeatureOneEntryPointEvents,
+    override fun handleUserAction(
+        event: FeatureOneEntryPointAction,
         currentState: FeatureOneEntryPointViewState
     ) {
         when (event) {
-            FeatureOneEntryPointEvents.ViewScreen -> {
-                setSideEffect(
-                    FeatureOneEntryPointSideEffects.NavigateToFeatureOneFragment(
+            FeatureOneEntryPointAction.ViewScreen -> {
+                emitSideEffect(
+                    FeatureOneEntryPointSideEffect.NavigateToFeatureOneFragment(
                         FEATURE_ONE_ACTIVITY_BACK_STACK
                     )
                 )

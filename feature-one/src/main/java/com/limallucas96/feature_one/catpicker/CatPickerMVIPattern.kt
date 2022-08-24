@@ -1,7 +1,7 @@
 package com.limallucas96.feature_one.catpicker
 
 import com.limallucas96.core_presentation.mvi.SideEffect
-import com.limallucas96.core_presentation.mvi.ViewEvent
+import com.limallucas96.core_presentation.mvi.ViewAction
 import com.limallucas96.core_presentation.mvi.ViewState
 
 data class CatPickerViewState(
@@ -12,22 +12,22 @@ data class CatPickerViewState(
     val catUrlPhoto: String = ""
 ) : ViewState
 
-sealed class CatPickerEvents : ViewEvent {
+sealed class CatPickerAction : ViewAction {
     data class InitView(
         val catName: String,
         val catAge: String,
-    ) : CatPickerEvents()
-    object ViewScreen : CatPickerEvents()
-    object ButtonChooseCatClick : CatPickerEvents()
-    object ButtonShortNewCat : CatPickerEvents()
-    object Retry : CatPickerEvents()
+    ) : CatPickerAction()
+    object ViewScreen : CatPickerAction()
+    object ButtonChooseCatClick : CatPickerAction()
+    object ButtonShortNewCat : CatPickerAction()
+    object Retry : CatPickerAction()
 }
 
-sealed class CatPickerSideEffects : SideEffect {
+sealed class CatPickerSideEffect : SideEffect {
     data class NavigateToCatSummary(
         val catName: String = "",
         val catAge: String = "",
         val catPhotoUrl: String = "",
         val clearBackStack: Boolean = true
-    ) : CatPickerSideEffects()
+    ) : CatPickerSideEffect()
 }

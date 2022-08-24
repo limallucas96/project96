@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.limallucas96.core_presentation.R
 
-abstract class BaseMVINavigationFragment<VB : ViewBinding, UIEvent : ViewEvent, UIViewState : ViewState, UISideEffect : SideEffect> :
-    BaseMVIFragment<VB, UIEvent, UIViewState, UISideEffect>() {
+abstract class BaseMVINavigationFragment<VB : ViewBinding, UserAction : ViewAction, UIViewState : ViewState, UISideEffect : SideEffect> :
+    BaseMVIFragment<VB, UserAction, UIViewState, UISideEffect>() {
 
     fun navigateTo(
         fragment: Fragment,
