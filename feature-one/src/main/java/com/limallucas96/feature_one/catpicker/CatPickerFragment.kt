@@ -71,7 +71,7 @@ class CatPickerFragment :
     private fun handleViewState(viewState: CatPickerViewState) {
         binding.run {
             progressBarLoading.isVisible = viewState.isLoading
-            groupContent.isVisible = viewState.isLoading.not()
+            groupContent.isVisible = viewState.isError.not() && viewState.isLoading.not()
             textViewRetry.isVisible = viewState.isError
         }
     }

@@ -1,10 +1,13 @@
 package com.limallucas96.feature_one.catpicker
 
 import androidx.lifecycle.viewModelScope
-import com.limallucas96.core_common.wrappers.ResultWrapper
 import com.limallucas96.core_data.repositories.cat.CatRepository
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.fold
+import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,9 +45,15 @@ class CatPickerViewModel @Inject constructor(
     private fun fetchCats() {
         updateViewState { copy(isLoading = true) }
         viewModelScope.launch {
-            val url =
-                (catRepository.getCats() as ResultWrapper.Success).value.firstOrNull()?.url.orEmpty()
-            updateViewState { copy(isLoading = false, catUrlPhoto = url) }
+            catRepository.getCats().fold(
+                onSuccess = { cats ->
+                    val url = cats.firstOrNull()?.url.orEmpty()
+                    updateViewState { copy(isLoading = false, catUrlPhoto = url) }
+                },
+                onFailure = {
+                    updateViewState { copy(isLoading = false, isError = true) }
+                }
+            )
         }
     }
 
@@ -57,10 +66,6 @@ class CatPickerViewModel @Inject constructor(
                 clearBackStack = true
             )
         )
-    }
-
-    companion object {
-        private const val CAT_PICKER_BACK_STACK = "CAT_PICKER_BACK_STACK"
     }
 
 }

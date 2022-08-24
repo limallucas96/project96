@@ -36,7 +36,6 @@ android {
 dependencies {
 
     implementation project(path: ':core-data')
-    implementation project(path: ':core-common')
     implementation project(path: ':navigator')
     implementation project(path: ':uikit')
 
