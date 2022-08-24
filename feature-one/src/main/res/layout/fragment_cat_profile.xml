@@ -7,31 +7,31 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/editText_petName"
+        android:id="@+id/editText_catName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Pet name"
+        android:hint="Cat name"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:maxLines="1"
-        app:layout_constraintBottom_toTopOf="@id/editText_petAge"
+        app:layout_constraintBottom_toTopOf="@id/editText_catAge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
-        android:id="@+id/editText_petAge"
+        android:id="@+id/editText_catAge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Pet age"
+        android:hint="Cat age"
         android:imeOptions="actionDone"
         android:inputType="number"
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@id/button_continue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editText_petName"
+        app:layout_constraintTop_toBottomOf="@id/editText_catName"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <com.limallucas96.uikit.views.MyButton
@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editText_petAge"
+        app:layout_constraintTop_toBottomOf="@id/editText_catAge"
         app:layout_constraintVertical_chainStyle="packed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

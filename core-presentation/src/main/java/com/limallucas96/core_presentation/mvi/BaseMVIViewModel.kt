@@ -19,7 +19,7 @@ abstract class BaseMVIViewModel<UIEvent : ViewEvent, UIViewState : ViewState, UI
     private val _event: MutableSharedFlow<UIEvent> = MutableSharedFlow()
     private val event = _event.asSharedFlow()
 
-    private val _sideEffect: Channel<SideEffect> = Channel()
+    private val _sideEffect: Channel<UISideEffect> = Channel()
     val sideEffect = _sideEffect.receiveAsFlow() // TODO other besides base activies can not see this
 
     init {
@@ -28,20 +28,20 @@ abstract class BaseMVIViewModel<UIEvent : ViewEvent, UIViewState : ViewState, UI
 
     abstract fun createInitialViewState(): UIViewState
 
-    abstract fun handleEvent(event: UIEvent)
+    abstract fun handleEvent(event: UIEvent, currentState: UIViewState)
 
-    protected fun setState(reduce: UIViewState.() -> UIViewState) {
+    protected fun updateViewState(reduce: UIViewState.() -> UIViewState) {
         val newState = currentState.reduce()
         _viewState.value = newState
     }
 
-    protected fun setSideEffect(sideEffect: SideEffect) {
+    protected fun setSideEffect(sideEffect: UISideEffect) {
         val newSideEffect = sideEffect
         viewModelScope.launch { _sideEffect.send(newSideEffect) }
     }
 
     private fun subscribeEvents() {
-        viewModelScope.launch { event.collect { handleEvent(it) } }
+        viewModelScope.launch { event.collect { handleEvent(it, currentState) } }
     }
 
     fun setEvent(event: UIEvent) {

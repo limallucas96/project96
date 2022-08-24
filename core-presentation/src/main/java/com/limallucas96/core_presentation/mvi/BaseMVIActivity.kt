@@ -12,7 +12,7 @@ abstract class BaseMVIActivity<VB : ViewBinding, UIEvent : ViewEvent, UIViewStat
 
     protected abstract fun onViewStateUpdated(viewState: UIViewState)
 
-    protected abstract fun onSideEffectReceived(sideEffect: SideEffect)
+    protected abstract fun onSideEffectReceived(sideEffect: UISideEffect)
 
     protected abstract fun onViewReady()
 

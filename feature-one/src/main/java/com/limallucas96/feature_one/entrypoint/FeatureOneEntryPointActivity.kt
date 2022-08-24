@@ -2,9 +2,10 @@ package com.limallucas96.feature_one.entrypoint
 
 import androidx.activity.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVINavigationActivity
-import com.limallucas96.core_presentation.mvi.SideEffect
-import com.limallucas96.feature_one.petprofile.FeatureOnePetProfileFragment
+import com.limallucas96.feature_one.catprofile.CatProfileFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FeatureOneEntryPointActivity :
     BaseMVINavigationActivity<FeatureOneEntryPointEvents, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffects>() {
 
@@ -18,10 +19,10 @@ class FeatureOneEntryPointActivity :
         // nothing to do here
     }
 
-    override fun onSideEffectReceived(sideEffect: SideEffect) {
+    override fun onSideEffectReceived(sideEffect: FeatureOneEntryPointSideEffects) {
         when (sideEffect) {
             is FeatureOneEntryPointSideEffects.NavigateToFeatureOneFragment -> {
-                navigateTo(FeatureOnePetProfileFragment.newInstance(), sideEffect.backStack)
+                navigateTo(CatProfileFragment.newInstance(), sideEffect.backStack)
             }
         }
     }

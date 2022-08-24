@@ -8,11 +8,11 @@ import com.limallucas96.core_presentation.base.BaseFragment
 abstract class BaseMVIFragment<VB : ViewBinding, UIEvent : ViewEvent, UIViewState : ViewState, UISideEffect : SideEffect> :
     BaseFragment<VB>() {
 
-//    protected abstract val viewModel: BaseMVIViewModel<UIEvent, UIViewState, UISideEffect>
+    protected abstract val viewModel: BaseMVIViewModel<UIEvent, UIViewState, UISideEffect>
 
     protected abstract fun onViewStateUpdated(viewState: UIViewState)
 
-    protected abstract fun onSideEffectReceived(sideEffect: SideEffect)
+    protected abstract fun onSideEffectReceived(sideEffect: UISideEffect)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,17 +22,17 @@ abstract class BaseMVIFragment<VB : ViewBinding, UIEvent : ViewEvent, UIViewStat
 
     private fun observeSideEffects() {
         lifecycleScope.launchWhenStarted {
-//            viewModel.sideEffect.collect { sideEffect ->
-//                onSideEffectReceived(sideEffect)
-//            }
+            viewModel.sideEffect.collect { sideEffect ->
+                onSideEffectReceived(sideEffect)
+            }
         }
     }
 
     private fun observeViewState() {
         lifecycleScope.launchWhenStarted {
-//            viewModel.viewState.collect { viewState ->
-//                onViewStateUpdated(viewState)
-//            }
+            viewModel.viewState.collect { viewState ->
+                onViewStateUpdated(viewState)
+            }
         }
     }
 

@@ -40,6 +40,9 @@ dependencies {
 
     implementation project(path: ':uikit')
     implementation project(path: ':core-presentation')
+    implementation project(path: ':core-data')
+    implementation project(path: ':core-common')
+    implementation project(path: ':domain-model')
 
     //Hilt
     implementation rootProject.libraries.hiltAndroid
@@ -55,4 +58,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     implementation 'androidx.activity:activity-ktx:1.5.1' //by viewModels()
+
+    implementation 'androidx.fragment:fragment-ktx:1.5.2'  //by fragment viewModels()
+
 }
