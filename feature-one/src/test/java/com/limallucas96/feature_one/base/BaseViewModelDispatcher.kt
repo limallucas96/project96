@@ -1,4 +1,4 @@
-package com.limallucas96.feature_one
+package com.limallucas96.feature_one.base
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

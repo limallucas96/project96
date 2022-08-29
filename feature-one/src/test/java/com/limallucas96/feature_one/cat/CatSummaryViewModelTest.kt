@@ -1,5 +1,6 @@
-package com.limallucas96.feature_one
+package com.limallucas96.feature_one.cat
 
+import com.limallucas96.feature_one.base.BaseMVIViewModelTest
 import com.limallucas96.feature_one.catsummary.CatSummaryAction
 import com.limallucas96.feature_one.catsummary.CatSummarySideEffect
 import com.limallucas96.feature_one.catsummary.CatSummaryViewModel

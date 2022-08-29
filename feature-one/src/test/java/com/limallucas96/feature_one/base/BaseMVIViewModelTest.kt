@@ -1,4 +1,4 @@
-package com.limallucas96.feature_one
+package com.limallucas96.feature_one.base
 
 import app.cash.turbine.test
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
