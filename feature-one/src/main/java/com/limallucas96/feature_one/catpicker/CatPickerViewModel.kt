@@ -41,7 +41,7 @@ class CatPickerViewModel @Inject constructor(
     }
 
     private fun fetchCats() {
-        updateViewState { copy(isLoading = true) }
+        updateViewState { copy(isLoading = true, isError = false) }
         viewModelScope.launch(defaultDispatcher) {
             catRepository.getCats().fold(
                 onSuccess = { cats ->

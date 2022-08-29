@@ -11,8 +11,7 @@ import javax.inject.Inject
 class CatRepositoryImp @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     private val catDataSource: CatDataSource
-) :
-    CatRepository {
+) : CatRepository {
 
     override suspend fun getCats(): Result<List<Cat>> {
         return runSafeCall(ioDispatcher) {

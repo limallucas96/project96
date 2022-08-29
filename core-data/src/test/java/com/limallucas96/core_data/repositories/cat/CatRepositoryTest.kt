@@ -14,7 +14,7 @@ import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
-class CatRepositoryTest  {
+class CatRepositoryTest {
 
     private lateinit var catRepository: CatRepository
 
