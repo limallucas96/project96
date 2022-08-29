@@ -6,10 +6,7 @@ import com.limallucas96.feature_one.catsummary.CatSummarySideEffect
 import com.limallucas96.feature_one.catsummary.CatSummaryViewModel
 import com.limallucas96.feature_one.catsummary.CatSummaryViewState
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class CatSummaryViewModelTest :
     BaseMVIViewModelTest<CatSummaryAction, CatSummaryViewState, CatSummarySideEffect, CatSummaryViewModel>() {
 
