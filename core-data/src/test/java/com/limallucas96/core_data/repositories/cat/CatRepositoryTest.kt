@@ -1,10 +1,10 @@
 package com.limallucas96.core_data.repositories.cat
 
-import com.limallucas96.core_data.repositories.base.BaseRepositoryTest
 import com.limallucas96.core_network.datasources.CatDataSource
 import com.limallucas96.data_model.payloads.CatPayload
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,22 +14,23 @@ import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
-class CatRepositoryTest : BaseRepositoryTest() {
-
+class CatRepositoryTest  {
 
     private lateinit var catRepository: CatRepository
 
     @Mock
     private lateinit var mockCatDataSource: CatDataSource
 
+    private val testDispatcher = TestCoroutineDispatcher()
+
     @Before
     fun setup() {
-        catRepository = CatRepositoryImp(mockCatDataSource)
+        catRepository = CatRepositoryImp(testDispatcher, mockCatDataSource)
     }
 
     @Test
     fun `given an empty list of cats, when repository calls getCats, then assert that the list is empty`() =
-        runBlocking {
+        runBlockingTest {
 
             //given
             whenever(mockCatDataSource.getCats()).then { listOf<CatPayload>() }
@@ -43,7 +44,7 @@ class CatRepositoryTest : BaseRepositoryTest() {
 
     @Test
     fun `given a list of cats, when repository calls getCats, then assert that the list is not empty`() =
-        runBlocking {
+        runBlockingTest {
 
             //given
             whenever(mockCatDataSource.getCats()).then { listOf(CatPayload()) }
@@ -57,7 +58,7 @@ class CatRepositoryTest : BaseRepositoryTest() {
 
     @Test
     fun `given a list of cats with gif images, when repository calls getCats, then assert that the list is not empty and has no gif images`() =
-        runBlocking {
+        runBlockingTest {
 
             //mock
             val mock = (1..10).map { item -> CatPayload(url = if (item < 5) ".gif" else "") }
@@ -75,7 +76,7 @@ class CatRepositoryTest : BaseRepositoryTest() {
 
     @Test
     fun `given a fail api call, when repository calls getCats, then assert failure`() =
-        runBlocking {
+        runBlockingTest {
 
             //given
             whenever(mockCatDataSource.getCats()).then { Throwable() }
