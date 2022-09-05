@@ -53,7 +53,8 @@ class CatProfileViewModelTest :
             actions = listOf(
                 CatProfileAction.OnCatNameChanged(catName = "Cat"),
                 CatProfileAction.OnCatAgeChanged(catAge = "2")
-            )
+            ),
+            emissionCount = 2
         )
 
     @Test

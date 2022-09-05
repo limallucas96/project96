@@ -14,13 +14,10 @@ abstract class BaseMVIActivity<VB : ViewBinding, UIEvent : ViewAction, UIViewSta
 
     protected abstract fun onSideEffectReceived(sideEffect: UISideEffect)
 
-    protected abstract fun onViewReady()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observeSideEffect()
         observeViewState()
-        onViewReady()
     }
 
     private fun observeSideEffect() {

@@ -20,6 +20,7 @@ abstract class BaseMVINavigationActivity<UserAction : ViewAction, UIViewState : 
         }
     }
 
+    // TODO put this in navigator
     fun navigateTo(
         fragment: Fragment,
         backStack: String? = null,

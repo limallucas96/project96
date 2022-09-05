@@ -7,8 +7,14 @@ import com.limallucas96.core_presentation.mvi.ViewAction
 import com.limallucas96.core_presentation.mvi.ViewState
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
+import java.lang.Exception
 
 @OptIn(ExperimentalCoroutinesApi::class)
 abstract class BaseMVIViewModelTest<
@@ -38,19 +44,31 @@ abstract class BaseMVIViewModelTest<
 
         viewModel.sideEffect.test {
             assertEquals(expectedSideEffect, awaitItem())
+            ensureAllEventsConsumed()
         }
     }
 
     protected fun assertViewState(
         expectedViewState: UIViewState,
-        actions: List<UserAction>
-    ) = runTest {
+        actions: List<UserAction>,
+        initializeMocks: () -> Unit = {},
+        emissionCount: Int = 1
+    ) = runTest(UnconfinedTestDispatcher()) {
 
-        actions.forEach { userAction ->
-            viewModel.dispatch(userAction)
-        }
+        // Init mocks
+        initializeMocks()
 
-        assertEquals(viewModel.viewState.value, expectedViewState)
+        // Collects all emitted view states
+        val viewStateList = mutableListOf<UIViewState>()
+        val job = launch { viewModel.viewState.toList(viewStateList) }
+
+        // Dispatch actions
+        actions.forEach { userAction -> viewModel.dispatch(userAction) }
+
+        assertEquals(viewStateList.getOrNull(emissionCount), expectedViewState)
+
+        // Cancels job
+        job.cancel()
     }
 
 }

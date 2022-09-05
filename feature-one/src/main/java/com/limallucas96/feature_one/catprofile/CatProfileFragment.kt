@@ -1,6 +1,8 @@
 package com.limallucas96.feature_one.catprofile
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
@@ -36,7 +38,8 @@ class CatProfileFragment :
         }
     }
 
-    override fun onViewReady() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupListeners()
     }
 

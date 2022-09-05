@@ -1,5 +1,6 @@
 package com.limallucas96.feature_one.entrypoint
 
+import android.os.Bundle
 import androidx.activity.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVINavigationActivity
 import com.limallucas96.feature_one.catprofile.CatProfileFragment
@@ -11,7 +12,8 @@ class FeatureOneEntryPointActivity :
 
     override val viewModel: FeatureOneEntryPointViewModel by viewModels()
 
-    override fun onViewReady() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel.dispatch(FeatureOneEntryPointAction.ViewScreen)
     }
 

@@ -1,6 +1,8 @@
 package com.limallucas96.feature_one.catpicker
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -48,7 +50,8 @@ class CatPickerFragment :
         }
     }
 
-    override fun onViewReady() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupListeners()
         viewModel.dispatch(CatPickerAction.InitView(catName, catAge))
         viewModel.dispatch(CatPickerAction.ViewScreen)
