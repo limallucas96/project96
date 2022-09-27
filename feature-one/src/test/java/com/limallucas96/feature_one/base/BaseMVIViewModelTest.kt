@@ -5,15 +5,13 @@ import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import com.limallucas96.core_presentation.mvi.SideEffect
 import com.limallucas96.core_presentation.mvi.ViewAction
 import com.limallucas96.core_presentation.mvi.ViewState
+import com.limallucas96.feature_one.dispatchers.TestDispatchers
 import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.*
 import org.junit.Before
+import org.junit.Test
 import java.lang.Exception
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -36,12 +34,14 @@ abstract class BaseMVIViewModelTest<
     protected fun assertSideEffect(
         expectedSideEffect: UISideEffect,
         actions: List<UserAction>
-    ) = runTest {
+    ) = runTest(UnconfinedTestDispatcher()) {
 
+        // Dispatch actions
         actions.forEach { userAction ->
             viewModel.dispatch(userAction)
         }
 
+        // Asserts right side effect was emitted when the action was dispatched
         viewModel.sideEffect.test {
             assertEquals(expectedSideEffect, awaitItem())
             ensureAllEventsConsumed()
@@ -51,8 +51,8 @@ abstract class BaseMVIViewModelTest<
     protected fun assertViewState(
         expectedViewState: UIViewState,
         actions: List<UserAction>,
-        initializeMocks: () -> Unit = {},
-        emissionCount: Int = 1
+        initializeMocks: suspend () -> Unit = {},
+        emissionCount: Int = 1,
     ) = runTest(UnconfinedTestDispatcher()) {
 
         // Init mocks
@@ -65,6 +65,7 @@ abstract class BaseMVIViewModelTest<
         // Dispatch actions
         actions.forEach { userAction -> viewModel.dispatch(userAction) }
 
+        // Asserts view state at specific index with the expected view state
         assertEquals(viewStateList.getOrNull(emissionCount), expectedViewState)
 
         // Cancels job

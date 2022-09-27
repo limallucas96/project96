@@ -1,17 +1,18 @@
 package com.limallucas96.feature_one.catpicker
 
 import androidx.lifecycle.viewModelScope
-import com.limallucas96.core_common.MainDispatcher
+import com.limallucas96.core_common.AppDispatcherProvider
 import com.limallucas96.core_data.repositories.cat.CatRepository
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
 
 @HiltViewModel
 class CatPickerViewModel @Inject constructor(
-    @MainDispatcher private val defaultDispatcher: CoroutineDispatcher,
+    private val dispatcher: AppDispatcherProvider,
     private val catRepository: CatRepository
 ) : BaseMVIViewModel<CatPickerAction, CatPickerViewState, CatPickerSideEffect>() {
 
@@ -42,7 +43,7 @@ class CatPickerViewModel @Inject constructor(
 
     private fun fetchCats() {
         updateViewState { copy(isLoading = true, isError = false) }
-        viewModelScope.launch(defaultDispatcher) {
+        viewModelScope.launch(dispatcher.default) {
             catRepository.getCats().fold(
                 onSuccess = { cats ->
                     val url = cats.firstOrNull()?.url.orEmpty()

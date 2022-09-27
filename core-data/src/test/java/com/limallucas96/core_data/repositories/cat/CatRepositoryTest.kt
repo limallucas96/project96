@@ -1,9 +1,9 @@
 package com.limallucas96.core_data.repositories.cat
 
+import com.limallucas96.core_data.dispatchers.TestDispatchers
 import com.limallucas96.core_network.datasources.CatDataSource
 import com.limallucas96.data_model.payloads.CatPayload
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
@@ -21,11 +21,9 @@ class CatRepositoryTest {
     @Mock
     private lateinit var mockCatDataSource: CatDataSource
 
-    private val testDispatcher = TestCoroutineDispatcher()
-
     @Before
     fun setup() {
-        catRepository = CatRepositoryImp(testDispatcher, mockCatDataSource)
+        catRepository = CatRepositoryImp(TestDispatchers(), mockCatDataSource)
     }
 
     @Test

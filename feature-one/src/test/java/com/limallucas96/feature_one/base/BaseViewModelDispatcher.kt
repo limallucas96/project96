@@ -12,7 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 abstract class BaseViewModelDispatcher {
 
-    protected val testDispatcher = UnconfinedTestDispatcher()
+    private val testDispatcher = UnconfinedTestDispatcher()
 
     @Before
     fun setup() {
