@@ -2,6 +2,8 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -55,4 +57,8 @@ dependencies {
     implementation 'androidx.databinding:viewbinding:7.2.2'
     implementation 'androidx.databinding:databinding-runtime:7.2.2'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+
+    //Hilt
+    implementation rootProject.libraries.hiltAndroid
+    kapt rootProject.libraries.hiltCompiler
 }

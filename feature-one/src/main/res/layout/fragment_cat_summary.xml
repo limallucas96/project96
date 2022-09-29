@@ -7,7 +7,19 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textView_catSummary"
+        android:id="@+id/textView_catName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Pick your cat"
+        app:layout_constraintBottom_toTopOf="@id/textView_catAge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textView_catAge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -15,7 +27,7 @@
         app:layout_constraintBottom_toTopOf="@id/imageView_cat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_catName"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
@@ -26,7 +38,7 @@
         app:layout_constraintBottom_toTopOf="@id/button_reDoMyCat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_catSummary"
+        app:layout_constraintTop_toBottomOf="@id/textView_catAge"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <com.limallucas96.uikit.views.MyButton

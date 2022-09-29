@@ -6,7 +6,8 @@ import com.limallucas96.core_presentation.mvi.ViewState
 
 
 data class CatSummaryViewState(
-    val catSummary: String = "",
+    val catName: String = "",
+    val catAge: String = "",
     val catPhotoUrl: String = ""
 ) : ViewState
 
@@ -20,10 +21,12 @@ sealed class CatSummaryAction : ViewAction {
     object ButtonGoToHomeClick : CatSummaryAction()
     object ButtonGoToCatProfileClick : CatSummaryAction()
     object ButtonSaveLocallyClick : CatSummaryAction()
+    object DialogConfirmExitClick : CatSummaryAction()
 }
 
 sealed class CatSummarySideEffect : SideEffect {
     object NavigateToHome : CatSummarySideEffect()
+    object ShowExitConfirmationDialog : CatSummarySideEffect()
     data class NavigateToCatProfile(
         val clearBackStack: Boolean
     ) : CatSummarySideEffect()

@@ -1,0 +1,7 @@
+<resources>
+    <string name="my_cat_name">My cat name: %s</string>
+    <string name="my_cat_age">My cat age: %s</string>
+    <string name="cat_summary_fragment_exit_dialog_title">You\'ve created your cat</string>
+    <string name="cat_summary_fragment_exit_dialog_body">Your cat was saved locally</string>
+    <string name="cat_summary_fragment_exit_dialog_positive_button">Go to home</string>
+</resources>

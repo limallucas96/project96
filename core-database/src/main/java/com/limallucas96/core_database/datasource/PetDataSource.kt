@@ -15,6 +15,6 @@ interface PetDataSource {
     suspend fun insertPet(petEntity: PetEntity)
 
     @Query("SELECT * FROM $PET_ENTITY_TABLE_NAME")
-    suspend fun getPets(): Flow<List<PetEntity>>
+    fun getPets(): Flow<List<PetEntity>>
 
 }

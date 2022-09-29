@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PetRepository {
 
-    suspend fun insertCat(cat: Cat)
-    suspend fun getCat(): Flow<Result<List<Cat>>>
+    suspend fun insertPet(petName: String, petAge: Int, petPhotoUrl: String)
+    suspend fun getPets(): Flow<Result<List<Cat>>>
 
 }

@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVINavigationFragment
-import com.limallucas96.feature_one.databinding.FragmentCatSummaryBinding
+import com.limallucas96.feature_one.R
 import com.limallucas96.feature_one.catprofile.CatProfileFragment
+import com.limallucas96.feature_one.databinding.FragmentCatSummaryBinding
 import com.limallucas96.uikit.extensions.argument
 import com.limallucas96.uikit.extensions.loadUrl
+import com.limallucas96.uikit.extensions.showAppDialog
 import com.limallucas96.uikit.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,7 +35,8 @@ class CatSummaryFragment :
 
     override fun renderViewState(viewState: CatSummaryViewState) {
         binding.run {
-            textViewCatSummary.text = viewState.catSummary
+            textViewCatName.text = viewState.catName
+            textViewCatAge.text = viewState.catAge
             activity?.let { context -> imageViewCat.loadUrl(context, viewState.catPhotoUrl) }
         }
     }
@@ -49,6 +52,9 @@ class CatSummaryFragment :
                     CatProfileFragment.newInstance(),
                     clearStack = sideEffect.clearBackStack
                 )
+            }
+            CatSummarySideEffect.ShowExitConfirmationDialog -> {
+                showExitConfirmationDialog()
             }
         }
     }
@@ -71,6 +77,16 @@ class CatSummaryFragment :
                 viewModel.dispatch(CatSummaryAction.ButtonSaveLocallyClick)
             }
         }
+    }
+
+    private fun showExitConfirmationDialog() {
+        activity?.showAppDialog(
+            title = getString(R.string.cat_summary_fragment_exit_dialog_title),
+            body = getString(R.string.cat_summary_fragment_exit_dialog_body),
+            positiveText = getString(R.string.cat_summary_fragment_exit_dialog_positive_button),
+            isCancelable = false,
+            positiveAction = { viewModel.dispatch(CatSummaryAction.DialogConfirmExitClick) }
+        )
     }
 
     companion object {
