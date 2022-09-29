@@ -5,6 +5,7 @@
       <module name="MVI96.app" target="11" />
       <module name="MVI96.core-common" target="11" />
       <module name="MVI96.core-data" target="11" />
+      <module name="MVI96.core-database" target="11" />
       <module name="MVI96.core-network" target="11" />
       <module name="MVI96.core-presentation" target="11" />
       <module name="MVI96.core-sharedpreferences" target="11" />

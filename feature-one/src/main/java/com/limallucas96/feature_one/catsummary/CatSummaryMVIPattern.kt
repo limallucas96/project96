@@ -19,6 +19,7 @@ sealed class CatSummaryAction : ViewAction {
 
     object ButtonGoToHomeClick : CatSummaryAction()
     object ButtonGoToCatProfileClick : CatSummaryAction()
+    object ButtonSaveLocallyClick : CatSummaryAction()
 }
 
 sealed class CatSummarySideEffect : SideEffect {

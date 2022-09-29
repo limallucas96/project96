@@ -12,7 +12,9 @@ import com.limallucas96.feature_one.catprofile.CatProfileFragment
 import com.limallucas96.uikit.extensions.argument
 import com.limallucas96.uikit.extensions.loadUrl
 import com.limallucas96.uikit.extensions.withArgs
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CatSummaryFragment :
     BaseMVINavigationFragment<FragmentCatSummaryBinding, CatSummaryAction, CatSummaryViewState, CatSummarySideEffect>() {
 
@@ -64,6 +66,9 @@ class CatSummaryFragment :
             }
             buttonReDoMyCat.setOnClickListener {
                 viewModel.dispatch(CatSummaryAction.ButtonGoToCatProfileClick)
+            }
+            buttonSaveLocally.setOnClickListener {
+                viewModel.dispatch(CatSummaryAction.ButtonSaveLocallyClick)
             }
         }
     }
