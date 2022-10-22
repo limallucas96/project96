@@ -1,24 +1,25 @@
 package com.limallucas96.feature_one.cat
 
 import com.limallucas96.core_data.repositories.cat.CatRepository
+import com.limallucas96.core_presentation_test.base.BaseMVIViewModelTest
 import com.limallucas96.domain_model.models.Cat
-import com.limallucas96.feature_one.base.BaseMVIViewModelTest
 import com.limallucas96.feature_one.catpicker.CatPickerAction
 import com.limallucas96.feature_one.catpicker.CatPickerSideEffect
 import com.limallucas96.feature_one.catpicker.CatPickerViewModel
 import com.limallucas96.feature_one.catpicker.CatPickerViewState
-import com.limallucas96.feature_one.dispatchers.TestDispatchers
+import com.limallucas96.core_presentation_test.dispatchers.TestDispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.*
+import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.kotlin.doAnswer
+import org.mockito.Mockito.`when`
+import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.whenever
-import java.lang.RuntimeException
 
 @ExperimentalCoroutinesApi
+@RunWith(MockitoJUnitRunner::class)
 class CatPickerViewModelTest :
     BaseMVIViewModelTest<CatPickerAction, CatPickerViewState, CatPickerSideEffect, CatPickerViewModel>() {
 
@@ -33,8 +34,9 @@ class CatPickerViewModelTest :
     @Mock
     private lateinit var mockCatRepository: CatRepository
 
-    override fun getViewModel(): CatPickerViewModel {
-        return CatPickerViewModel(TestDispatchers(), mockCatRepository)
+    @Before
+    fun setupViewModel() {
+        viewModel = CatPickerViewModel(TestDispatchers(), mockCatRepository)
     }
 
     @Test
@@ -78,6 +80,7 @@ class CatPickerViewModelTest :
 
     private suspend fun mockSuccessGetCatsApiCall() {
         whenever(mockCatRepository.getCats()).then { Result.success(listOf(Cat("cat", "description", "https"))) }
+//        `when`(mockCatRepository.getCats()).thenReturn(Result.success(listOf(Cat("cat", "description", "https"))))
     }
 
     private suspend fun mockErrorGetCatsApiCall() {

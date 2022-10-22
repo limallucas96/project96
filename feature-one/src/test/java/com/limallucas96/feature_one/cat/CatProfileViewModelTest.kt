@@ -1,10 +1,11 @@
 package com.limallucas96.feature_one.cat
 
-import com.limallucas96.feature_one.base.BaseMVIViewModelTest
+import com.limallucas96.core_presentation_test.base.BaseMVIViewModelTest
 import com.limallucas96.feature_one.catprofile.CatProfileAction
 import com.limallucas96.feature_one.catprofile.CatProfileSideEffect
 import com.limallucas96.feature_one.catprofile.CatProfileViewModel
 import com.limallucas96.feature_one.catprofile.CatProfileViewState
+import org.junit.Before
 import org.junit.Test
 
 class CatProfileViewModelTest :
@@ -16,8 +17,9 @@ class CatProfileViewModelTest :
         isContinueButtonEnable = false
     )
 
-    override fun getViewModel(): CatProfileViewModel {
-        return CatProfileViewModel()
+    @Before
+    fun setupViewModel() {
+        viewModel = CatProfileViewModel()
     }
 
     @Test

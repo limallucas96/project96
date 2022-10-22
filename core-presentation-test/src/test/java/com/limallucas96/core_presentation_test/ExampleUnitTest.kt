@@ -1,4 +1,4 @@
-package com.limallucas96.feature_one
+package com.limallucas96.core_presentation_test
 
 import org.junit.Test
 

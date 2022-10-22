@@ -1,13 +1,15 @@
 package com.limallucas96.feature_one.entrypoint
 
-import com.limallucas96.feature_one.base.BaseMVIViewModelTest
+import com.limallucas96.core_presentation_test.base.BaseMVIViewModelTest
+import org.junit.Before
 import org.junit.Test
 
 class FeatureOneEntryPointViewModelTest :
     BaseMVIViewModelTest<FeatureOneEntryPointAction, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffect, FeatureOneEntryPointViewModel>() {
 
-    override fun getViewModel(): FeatureOneEntryPointViewModel {
-        return FeatureOneEntryPointViewModel()
+    @Before
+    fun setupViewModel() {
+        viewModel = FeatureOneEntryPointViewModel()
     }
 
     @Test
