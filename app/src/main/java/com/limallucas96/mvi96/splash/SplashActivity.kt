@@ -19,15 +19,15 @@ class SplashActivity :
     @set:Inject
     lateinit var featureTwoNavigator: FeatureTwoNavigator
 
+    override val viewModel: SplashViewModel by viewModels()
+
+    override fun inflateBinding() = ActivitySplashBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupListeners()
         viewModel.dispatch(SplashAction.ViewScreen)
     }
-
-    override fun inflateBinding() = ActivitySplashBinding.inflate(layoutInflater)
-
-    override val viewModel: SplashViewModel by viewModels()
 
     override fun onViewStateUpdated(viewState: SplashViewState) {
         binding.textViewPetCounter.text = viewState.petCounter
