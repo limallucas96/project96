@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MVI96</string>
+    <string name="pet_counter">pet counter: %s</string>
 </resources>

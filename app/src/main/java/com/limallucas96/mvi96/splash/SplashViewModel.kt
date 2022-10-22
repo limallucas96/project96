@@ -1,25 +1,35 @@
 package com.limallucas96.mvi96.splash
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.limallucas96.core_data.repositories.cat.CatRepository
+import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
+import com.limallucas96.core_presentation.resourceprovider.ResourcesProvider
 import com.limallucas96.core_sharedpreferences.sharedpreferences.AppSharedPreferences
+import com.limallucas96.mvi96.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val catRepository: CatRepository,
-    private val sharedPreferencesRepository: AppSharedPreferences
-) : ViewModel() {
+    private val sharedPreferencesRepository: AppSharedPreferences,
+    private val resourcesProvider: ResourcesProvider
+) : BaseMVIViewModel<SplashAction, SplashViewState, SplashSideEffect>() {
 
-    fun fetchCats() {
+    override fun createInitialViewState() = SplashViewState()
+
+    private fun fetchPets() {
         viewModelScope.launch {
-            val cats = catRepository.getCats()
-            sharedPreferencesRepository.putString("TEMP", "TEST")
-            val a = sharedPreferencesRepository.getString("TEMP")
-            println()
+            // TODO Fetch pet counter from sharedPref
+            val petCounter = resourcesProvider.getString(R.string.pet_counter, "10")
+            updateViewState { copy(petCounter = petCounter) }
+        }
+    }
+
+    override fun handleUserAction(event: SplashAction, currentState: SplashViewState) {
+        when (event) {
+            SplashAction.PrimaryButtonClick -> emitSideEffect(SplashSideEffect.NavigateToFeatureOne)
+            SplashAction.SecondaryButtonClick -> emitSideEffect(SplashSideEffect.NavigateToFeatureTwo)
+            SplashAction.ViewScreen -> fetchPets()
         }
     }
 

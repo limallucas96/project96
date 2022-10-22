@@ -27,7 +27,8 @@ abstract class BaseMVIViewModelTest<
 
     protected fun assertSideEffect(
         expectedSideEffect: UISideEffect,
-        actions: List<UserAction>
+        actions: List<UserAction>,
+        initializeMocks: suspend () -> Unit = {}
     ) = runTest(UnconfinedTestDispatcher()) {
 
         // Dispatch actions

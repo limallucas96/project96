@@ -2,18 +2,16 @@ package com.limallucas96.mvi96.splash
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
-import com.limallucas96.mvi96.R
+import com.limallucas96.core_presentation.mvi.BaseMVIActivity
+import com.limallucas96.mvi96.databinding.ActivitySplashBinding
 import com.limallucas96.navigator.featureone.FeatureOneNavigator
 import com.limallucas96.navigator.featuretwo.FeatureTwoNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SplashActivity : AppCompatActivity() {
-
-    private val viewModel: SplashViewModel by viewModels()
+class SplashActivity :
+    BaseMVIActivity<ActivitySplashBinding, SplashAction, SplashViewState, SplashSideEffect>() {
 
     @set:Inject
     lateinit var featureOneNavigator: FeatureOneNavigator
@@ -23,15 +21,37 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-        viewModel.fetchCats()
+        setupListeners()
+        viewModel.dispatch(SplashAction.ViewScreen)
+    }
 
-        findViewById<AppCompatButton>(R.id.button_featureOne).setOnClickListener {
-            startActivity(featureOneNavigator.newIntent(this))
+    override fun inflateBinding() = ActivitySplashBinding.inflate(layoutInflater)
+
+    override val viewModel: SplashViewModel by viewModels()
+
+    override fun onViewStateUpdated(viewState: SplashViewState) {
+        binding.textViewPetCounter.text = viewState.petCounter
+    }
+
+    override fun onSideEffectReceived(sideEffect: SplashSideEffect) {
+        when (sideEffect) {
+            SplashSideEffect.NavigateToFeatureOne -> {
+                startActivity(featureOneNavigator.newIntent(this))
+            }
+            SplashSideEffect.NavigateToFeatureTwo -> {
+                startActivity(featureTwoNavigator.newIntent(this))
+            }
         }
+    }
 
-        findViewById<AppCompatButton>(R.id.button_featureTwo).setOnClickListener {
-            startActivity(featureTwoNavigator.newIntent(this))
+    private fun setupListeners() {
+        binding.run {
+            buttonFeatureOne.setOnClickListener {
+                viewModel.dispatch(SplashAction.PrimaryButtonClick)
+            }
+            buttonFeatureTwo.setOnClickListener {
+                viewModel.dispatch(SplashAction.SecondaryButtonClick)
+            }
         }
     }
 
