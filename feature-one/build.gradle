@@ -44,6 +44,7 @@ dependencies {
     implementation project(path: ':core-data')
     implementation project(path: ':domain-model')
     implementation project(path: ':core-common')
+    implementation project(path: ':navigator')
 
     //Hilt
     implementation rootProject.libraries.hiltAndroid

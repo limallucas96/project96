@@ -45,6 +45,8 @@ dependencies {
     implementation project(path: ':core-data')
     implementation project(path: ':navigator')
     implementation project(path: ':uikit')
+    implementation project(path: ':feature-one')
+    implementation project(path: ':feature-two')
 
     //Hilt
     implementation rootProject.libraries.hiltAndroid

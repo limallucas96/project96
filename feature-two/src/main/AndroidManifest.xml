@@ -4,7 +4,17 @@
 
     <application>
 
-        <activity android:name=".FeatureTwoActivity" />
+        <activity
+            android:name=".FeatureTwoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="entrypoint.FeatureTwoEntryPointActivity.route" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
 
