@@ -4,17 +4,13 @@ import com.limallucas96.core_presentation.mvi.SideEffect
 import com.limallucas96.core_presentation.mvi.ViewAction
 import com.limallucas96.core_presentation.mvi.ViewState
 
-data class HomeViewState(
-    val petCounter: String = ""
+class FeatureHomeEntryPointViewState(
 ) : ViewState
 
-sealed class HomeAction : ViewAction {
-    object ViewScreen : HomeAction()
-    object PrimaryButtonClick : HomeAction()
-    object SecondaryButtonClick : HomeAction()
+sealed class FeatureHomeEntryPointAction : ViewAction {
+    object ViewScreen : FeatureHomeEntryPointAction()
 }
 
-sealed class HomeSideEffect : SideEffect {
-    object NavigateToFeatureOne : HomeSideEffect()
-    object NavigateToFeatureTwo : HomeSideEffect()
+sealed class FeatureHomeEntryPointSideEffect : SideEffect {
+    object NavigateToHomeFragment : FeatureHomeEntryPointSideEffect()
 }

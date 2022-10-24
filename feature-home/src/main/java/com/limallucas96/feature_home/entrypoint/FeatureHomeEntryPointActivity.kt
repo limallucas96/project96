@@ -2,55 +2,32 @@ package com.limallucas96.feature_home.entrypoint
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.limallucas96.core_presentation.mvi.BaseMVIActivity
-import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
-import com.limallucas96.feature_home.databinding.ActivityFeatureHomeEntryPointBinding
-import com.limallucas96.navigator.featureone.FeatureOneNavigator
-import com.limallucas96.navigator.featuretwo.FeatureTwoNavigator
+import com.limallucas96.core_presentation.mvi.BaseMVINavigationActivity
+import com.limallucas96.feature_home.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class FeatureHomeEntryPointActivity : BaseMVIActivity<ActivityFeatureHomeEntryPointBinding, HomeAction, HomeViewState, HomeSideEffect>() {
+class FeatureHomeEntryPointActivity :
+    BaseMVINavigationActivity<FeatureHomeEntryPointAction, FeatureHomeEntryPointViewState, FeatureHomeEntryPointSideEffect>() {
 
-    @set:Inject
-    lateinit var featureOneNavigator: FeatureOneNavigator
-
-    @set:Inject
-    lateinit var featureTwoNavigator: FeatureTwoNavigator
-
-    override fun inflateBinding() = ActivityFeatureHomeEntryPointBinding.inflate(layoutInflater)
-
-    override val viewModel : FeatureHomeEntryPointViewModel by viewModels()
+    override val viewModel: FeatureHomeEntryPointViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupListeners()
-        viewModel.dispatch(HomeAction.ViewScreen)
+        viewModel.dispatch(FeatureHomeEntryPointAction.ViewScreen)
     }
 
-    override fun onViewStateUpdated(viewState: HomeViewState) {
-        binding.textViewPetCounter.text = viewState.petCounter
+    override fun onViewStateUpdated(viewState: FeatureHomeEntryPointViewState) {
+        // nothing to do here
+        // TODO implement this in base so we dont need to implement her
     }
 
-    override fun onSideEffectReceived(sideEffect: HomeSideEffect) {
+    override fun onSideEffectReceived(sideEffect: FeatureHomeEntryPointSideEffect) {
         when (sideEffect) {
-            HomeSideEffect.NavigateToFeatureOne -> {
-                startActivity(featureOneNavigator.newIntent(this))
-            }
-            HomeSideEffect.NavigateToFeatureTwo -> {
-                startActivity(featureTwoNavigator.newIntent(this))
-            }
-        }
-    }
-
-    private fun setupListeners() {
-        binding.run {
-            buttonFeatureOne.setOnClickListener {
-                viewModel.dispatch(HomeAction.PrimaryButtonClick)
-            }
-            buttonFeatureTwo.setOnClickListener {
-                viewModel.dispatch(HomeAction.SecondaryButtonClick)
+            FeatureHomeEntryPointSideEffect.NavigateToHomeFragment -> {
+                navigateTo(
+                    fragment = HomeFragment.newInstance()
+                )
             }
         }
     }

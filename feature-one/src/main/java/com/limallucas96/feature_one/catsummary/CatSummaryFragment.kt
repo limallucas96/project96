@@ -10,15 +10,21 @@ import com.limallucas96.core_presentation.mvi.BaseMVINavigationFragment
 import com.limallucas96.feature_one.R
 import com.limallucas96.feature_one.catprofile.CatProfileFragment
 import com.limallucas96.feature_one.databinding.FragmentCatSummaryBinding
+import com.limallucas96.navigator.featurehome.FeatureHomeNavigator
+import com.limallucas96.navigator.featureone.FeatureOneNavigator
 import com.limallucas96.uikit.extensions.argument
 import com.limallucas96.uikit.extensions.loadUrl
 import com.limallucas96.uikit.extensions.showAppDialog
 import com.limallucas96.uikit.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CatSummaryFragment :
     BaseMVINavigationFragment<FragmentCatSummaryBinding, CatSummaryAction, CatSummaryViewState, CatSummarySideEffect>() {
+
+    @set:Inject
+    lateinit var featureHomeNavigator: FeatureHomeNavigator
 
     override val viewModel: CatSummaryViewModel by viewModels()
 
@@ -44,8 +50,11 @@ class CatSummaryFragment :
     override fun handleSideEffect(sideEffect: CatSummarySideEffect) {
         when (sideEffect) {
             CatSummarySideEffect.NavigateToHome -> {
-                // TODO Navigation to home or splash
-                Toast.makeText(requireContext(), "NavigateToHome", Toast.LENGTH_SHORT).show()
+                // TODO check about back stack when navigating back to home
+                activity?.let {
+                    startActivity(featureHomeNavigator.newIntent(it))
+                    it.finish()
+                }
             }
             is CatSummarySideEffect.NavigateToCatProfile -> {
                 navigateTo(

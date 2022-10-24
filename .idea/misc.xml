@@ -9,6 +9,7 @@
         <entry key="core-presentation/src/main/res/layout/activity_base_navigation.xml" value="0.35597826086956524" />
         <entry key="feature-home/src/main/res/layout/activity_feature_home_entry_point.xml" value="0.20416666666666666" />
         <entry key="feature-home/src/main/res/layout/fragment_cat_picker.xml" value="0.20416666666666666" />
+        <entry key="feature-home/src/main/res/layout/fragment_home.xml" value="0.3619791666666667" />
         <entry key="feature-one/src/main/res/layout/activity_feature_one.xml" value="0.2" />
         <entry key="feature-one/src/main/res/layout/activity_flow_one.xml" value="0.33177083333333335" />
         <entry key="feature-one/src/main/res/layout/fragment_cat_picker.xml" value="0.3179347826086957" />
