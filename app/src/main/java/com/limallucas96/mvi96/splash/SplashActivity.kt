@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVIActivity
 import com.limallucas96.mvi96.databinding.ActivitySplashBinding
-import com.limallucas96.navigator.featureone.FeatureOneNavigator
-import com.limallucas96.navigator.featuretwo.FeatureTwoNavigator
+import com.limallucas96.navigator.featurehome.FeatureHomeNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -14,10 +13,7 @@ class SplashActivity :
     BaseMVIActivity<ActivitySplashBinding, SplashAction, SplashViewState, SplashSideEffect>() {
 
     @set:Inject
-    lateinit var featureOneNavigator: FeatureOneNavigator
-
-    @set:Inject
-    lateinit var featureTwoNavigator: FeatureTwoNavigator
+    lateinit var featureHomeNavigator: FeatureHomeNavigator
 
     override val viewModel: SplashViewModel by viewModels()
 
@@ -25,32 +21,18 @@ class SplashActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupListeners()
         viewModel.dispatch(SplashAction.ViewScreen)
     }
 
     override fun onViewStateUpdated(viewState: SplashViewState) {
-        binding.textViewPetCounter.text = viewState.petCounter
+        // nothing to do here
     }
 
     override fun onSideEffectReceived(sideEffect: SplashSideEffect) {
         when (sideEffect) {
-            SplashSideEffect.NavigateToFeatureOne -> {
-                startActivity(featureOneNavigator.newIntent(this))
-            }
-            SplashSideEffect.NavigateToFeatureTwo -> {
-                startActivity(featureTwoNavigator.newIntent(this))
-            }
-        }
-    }
-
-    private fun setupListeners() {
-        binding.run {
-            buttonFeatureOne.setOnClickListener {
-                viewModel.dispatch(SplashAction.PrimaryButtonClick)
-            }
-            buttonFeatureTwo.setOnClickListener {
-                viewModel.dispatch(SplashAction.SecondaryButtonClick)
+            SplashSideEffect.NavigateToHome -> {
+                startActivity(featureHomeNavigator.newIntent(this))
+                finish()
             }
         }
     }

@@ -12,7 +12,7 @@ internal class FeatureOneNavigatorImpl @Inject constructor() : FeatureOneNavigat
     }
 
     companion object {
-        const val FEATURE_ONE_ENTRY_POINT_ROUTE = "entrypoint.FeatureOneEntryPointActivity.route"
+        private const val FEATURE_ONE_ENTRY_POINT_ROUTE = "entrypoint.FeatureOneEntryPointActivity.route"
     }
 
 }

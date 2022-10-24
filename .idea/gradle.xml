@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/core-sharedpreferences" />
             <option value="$PROJECT_DIR$/data-model" />
             <option value="$PROJECT_DIR$/domain-model" />
+            <option value="$PROJECT_DIR$/feature-home" />
             <option value="$PROJECT_DIR$/feature-one" />
             <option value="$PROJECT_DIR$/feature-two" />
             <option value="$PROJECT_DIR$/navigator" />

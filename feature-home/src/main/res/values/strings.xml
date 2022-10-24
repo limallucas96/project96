@@ -1,0 +1,3 @@
+<resources>
+    <string name="pet_counter">pet counter: %s</string>
+</resources>
