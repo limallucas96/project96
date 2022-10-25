@@ -1,35 +1,8 @@
 apply from: "$rootDir/common-android-library.gradle"
+apply from: "$rootDir/common-feature-modules.gradle"
+apply from: "$rootDir/common-feature-dependencies.gradle"
 apply plugin: 'dagger.hilt.android.plugin'
 
 dependencies {
-
-    implementation project(path: ':libraries:uikit')
-
-    implementation project(path: ':presentation:core-presentation')
-    implementation project(path: ':presentation:core-presentation-test')
-
-    implementation project(path: ':core:core-data')
-    implementation project(path: ':core:core-common')
-
-    implementation project(path: ':models:domain-model')
-
-    implementation project(path: ':libraries:navigator')
-
-    //Hilt
-    implementation rootProject.libraries.hiltAndroid
-    kapt rootProject.libraries.hiltCompiler
-
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
-
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
-    implementation 'androidx.activity:activity-ktx:1.5.1' //by viewModels()
-
-    implementation 'androidx.fragment:fragment-ktx:1.5.2'  //by fragment viewModels()
-
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito.kotlin:mockito-kotlin:3.2.0'
-
+    /** Add any particular dependency for this module here **/
 }

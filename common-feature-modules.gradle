@@ -1,0 +1,23 @@
+dependencies {
+
+    /** Shared modules that are used in all features including app. **/
+
+    // begin presentation
+    implementation project(path: ':presentation:core-presentation')
+    implementation project(path: ':presentation:core-presentation-test')
+    // end presentation
+
+    // begin core
+    implementation project(path: ':core:core-data')
+    implementation project(path: ':core:core-common')
+    // end core
+
+    // begin models
+    implementation project(path: ':models:domain-model')
+    // end models
+
+    // begin libraries
+    implementation project(path: ':libraries:uikit')
+    implementation project(path: ':libraries:navigator')
+    // end libraries
+}
