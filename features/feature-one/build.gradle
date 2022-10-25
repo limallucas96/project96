@@ -2,13 +2,17 @@ apply from: "$rootDir/common-android-library.gradle"
 
 dependencies {
 
-    implementation project(path: ':uikit')
-    implementation project(path: ':core-presentation')
-    implementation project(path: ':core-presentation-test')
-    implementation project(path: ':core-data')
-    implementation project(path: ':domain-model')
-    implementation project(path: ':core-common')
-    implementation project(path: ':navigator')
+    implementation project(path: ':libraries:uikit')
+
+    implementation project(path: ':presentation:core-presentation')
+    implementation project(path: ':presentation:core-presentation-test')
+
+    implementation project(path: ':core:core-data')
+    implementation project(path: ':core:core-common')
+
+    implementation project(path: ':models:domain-model')
+
+    implementation project(path: ':libraries:navigator')
 
     //Hilt
     implementation rootProject.libraries.hiltAndroid

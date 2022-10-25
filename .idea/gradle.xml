@@ -11,21 +11,25 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/core-common" />
-            <option value="$PROJECT_DIR$/core-data" />
-            <option value="$PROJECT_DIR$/core-database" />
-            <option value="$PROJECT_DIR$/core-network" />
-            <option value="$PROJECT_DIR$/core-presentation" />
-            <option value="$PROJECT_DIR$/core-presentation-test" />
-            <option value="$PROJECT_DIR$/core-sharedpreferences" />
-            <option value="$PROJECT_DIR$/data-model" />
-            <option value="$PROJECT_DIR$/domain-model" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/core-common" />
+            <option value="$PROJECT_DIR$/core/core-data" />
+            <option value="$PROJECT_DIR$/core/core-database" />
+            <option value="$PROJECT_DIR$/core/core-network" />
+            <option value="$PROJECT_DIR$/core/core-sharedpreferences" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/feature-home" />
             <option value="$PROJECT_DIR$/features/feature-one" />
             <option value="$PROJECT_DIR$/features/feature-two" />
-            <option value="$PROJECT_DIR$/navigator" />
-            <option value="$PROJECT_DIR$/uikit" />
+            <option value="$PROJECT_DIR$/libraries" />
+            <option value="$PROJECT_DIR$/libraries/navigator" />
+            <option value="$PROJECT_DIR$/libraries/uikit" />
+            <option value="$PROJECT_DIR$/models" />
+            <option value="$PROJECT_DIR$/models/data-model" />
+            <option value="$PROJECT_DIR$/models/domain-model" />
+            <option value="$PROJECT_DIR$/presentation" />
+            <option value="$PROJECT_DIR$/presentation/core-presentation" />
+            <option value="$PROJECT_DIR$/presentation/core-presentation-test" />
           </set>
         </option>
       </GradleProjectSettings>

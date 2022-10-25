@@ -2,10 +2,12 @@ apply from: "$rootDir/common-android-library.gradle"
 
 dependencies {
 
-    implementation project(path: ':core-presentation')
-    implementation project(path: ':core-presentation-test')
-    implementation project(path: ':uikit')
-    implementation project(path: ':navigator')
+    implementation project(path: ':presentation:core-presentation')
+    implementation project(path: ':presentation:core-presentation-test')
+
+    implementation project(path: ':libraries:uikit')
+
+    implementation project(path: ':libraries:navigator')
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'

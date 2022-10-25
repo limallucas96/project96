@@ -13,20 +13,24 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "MVI96"
+
 include ':app'
+
+include 'presentation:core-presentation-test'
+include 'presentation:core-presentation'
 
 include 'features:feature-home'
 include 'features:feature-two'
 include 'features:feature-one'
 
-include ':core-data'
-include ':core-sharedpreferences'
-include ':core-network'
-include ':domain-model'
-include ':core-common'
-include ':data-model'
-include ':uikit'
-include ':navigator'
-include ':core-presentation'
-include ':core-database'
-include ':core-presentation-test'
+include 'core:core-data'
+include 'core:core-sharedpreferences'
+include 'core:core-network'
+include 'core:core-database'
+include 'core:core-common'
+
+include 'models:domain-model'
+include 'models:data-model'
+
+include 'libraries:uikit'
+include 'libraries:navigator'
