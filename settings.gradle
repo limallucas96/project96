@@ -14,8 +14,11 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MVI96"
 include ':app'
-include ':feature-two'
-include ':feature-one'
+
+include 'features:feature-home'
+include 'features:feature-two'
+include 'features:feature-one'
+
 include ':core-data'
 include ':core-sharedpreferences'
 include ':core-network'
@@ -27,4 +30,3 @@ include ':navigator'
 include ':core-presentation'
 include ':core-database'
 include ':core-presentation-test'
-include ':feature-home'

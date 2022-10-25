@@ -13,6 +13,9 @@
       <module name="MVI96.feature-home" target="11" />
       <module name="MVI96.feature-one" target="11" />
       <module name="MVI96.feature-two" target="11" />
+      <module name="MVI96.features.feature-home" target="11" />
+      <module name="MVI96.features.feature-one" target="11" />
+      <module name="MVI96.features.feature-two" target="11" />
       <module name="MVI96.mylibrary" target="11" />
       <module name="MVI96.navigator" target="11" />
       <module name="MVI96.uikit" target="11" />

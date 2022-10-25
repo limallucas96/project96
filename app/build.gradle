@@ -41,9 +41,10 @@ android {
 dependencies {
 
     implementation project(path: ':navigator')
-    implementation project(path: ':feature-one')
-    implementation project(path: ':feature-two')
-    implementation project(path: ':feature-home')
+
+    implementation project(path: ':features:feature-one')
+    implementation project(path: ':features:feature-two')
+    implementation project(path: ':features:feature-home')
 
     implementation project(path: ':core-presentation')
     implementation project(path: ':core-presentation-test')
