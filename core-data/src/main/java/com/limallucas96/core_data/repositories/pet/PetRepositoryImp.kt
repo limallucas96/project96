@@ -1,4 +1,4 @@
-package com.limallucas96.core_data.repositories
+package com.limallucas96.core_data.repositories.pet
 
 import com.limallucas96.core_common.AppDispatchers
 import com.limallucas96.core_common.runSafeCall

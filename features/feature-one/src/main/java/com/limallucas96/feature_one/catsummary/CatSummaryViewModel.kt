@@ -2,7 +2,7 @@ package com.limallucas96.feature_one.catsummary
 
 import androidx.lifecycle.viewModelScope
 import com.limallucas96.core_common.AppDispatchers
-import com.limallucas96.core_data.repositories.PetRepository
+import com.limallucas96.core_data.repositories.pet.PetRepository
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import com.limallucas96.core_presentation.resourceprovider.ResourcesProvider
 import com.limallucas96.feature_one.R

@@ -1,7 +1,7 @@
 package com.limallucas96.core_data.di
 
-import com.limallucas96.core_data.repositories.PetRepository
-import com.limallucas96.core_data.repositories.PetRepositoryImp
+import com.limallucas96.core_data.repositories.pet.PetRepository
+import com.limallucas96.core_data.repositories.pet.PetRepositoryImp
 import com.limallucas96.core_data.repositories.cat.CatRepository
 import com.limallucas96.core_data.repositories.cat.CatRepositoryImp
 import dagger.Binds
