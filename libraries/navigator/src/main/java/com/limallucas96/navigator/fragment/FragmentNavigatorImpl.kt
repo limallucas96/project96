@@ -7,7 +7,7 @@ import com.limallucas96.navigator.extensions.clearBackStack
 import com.limallucas96.navigator.extensions.clearTop
 import com.limallucas96.navigator.extensions.replaceFragment
 import javax.inject.Inject
-import com.limallucas96.uikit.R
+import com.limallucas96.navigator.R
 
 internal class FragmentNavigatorImpl @Inject constructor() : FragmentNavigator {
 

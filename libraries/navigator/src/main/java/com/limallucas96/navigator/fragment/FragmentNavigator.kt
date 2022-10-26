@@ -2,7 +2,7 @@ package com.limallucas96.navigator.fragment
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.limallucas96.uikit.R
+import com.limallucas96.navigator.R
 
 interface FragmentNavigator {
 
