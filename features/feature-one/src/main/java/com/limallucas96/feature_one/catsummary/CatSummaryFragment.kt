@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.limallucas96.core_presentation.mvi.BaseMVINavigationFragment
+import com.limallucas96.core_presentation.mvi.BaseMVIFragment
 import com.limallucas96.feature_one.R
 import com.limallucas96.feature_one.catprofile.CatProfileFragment
 import com.limallucas96.feature_one.databinding.FragmentCatSummaryBinding
 import com.limallucas96.navigator.featurehome.FeatureHomeNavigator
-import com.limallucas96.navigator.featureone.FeatureOneNavigator
+import com.limallucas96.navigator.fragment.FragmentNavigator
 import com.limallucas96.uikit.extensions.argument
 import com.limallucas96.uikit.extensions.loadUrl
 import com.limallucas96.uikit.extensions.showAppDialog
@@ -21,7 +20,10 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class CatSummaryFragment :
-    BaseMVINavigationFragment<FragmentCatSummaryBinding, CatSummaryAction, CatSummaryViewState, CatSummarySideEffect>() {
+    BaseMVIFragment<FragmentCatSummaryBinding, CatSummaryAction, CatSummaryViewState, CatSummarySideEffect>() {
+
+    @set:Inject
+    lateinit var navigator: FragmentNavigator
 
     @set:Inject
     lateinit var featureHomeNavigator: FeatureHomeNavigator
@@ -57,7 +59,8 @@ class CatSummaryFragment :
                 }
             }
             is CatSummarySideEffect.NavigateToCatProfile -> {
-                navigateTo(
+                navigator.navigateTo(
+                    activity,
                     CatProfileFragment.newInstance(),
                     clearStack = sideEffect.clearBackStack
                 )

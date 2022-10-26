@@ -13,5 +13,6 @@ dependencies {
     implementation rootProject.libraries.coroutinesTest
     implementation rootProject.libraries.coroutinesTest
     implementation rootProject.libraries.truth
+    implementation rootProject.libraries.turbine
 
 }

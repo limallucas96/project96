@@ -1,9 +1,8 @@
 package com.limallucas96.core_presentation.mvi
 
-import androidx.fragment.app.Fragment
-import com.limallucas96.core_presentation.R
 import com.limallucas96.core_presentation.databinding.ActivityBaseNavigationBinding
-import com.limallucas96.core_presentation.extensions.*
+import com.limallucas96.core_presentation.extensions.isLastFragment
+import com.limallucas96.core_presentation.extensions.removeAllFragmentsFromBackStack
 
 abstract class BaseMVINavigationActivity<UserAction : ViewAction, UIViewState : ViewState, UISideEffect : SideEffect> :
     BaseMVIActivity<ActivityBaseNavigationBinding, UserAction, UIViewState, UISideEffect>() {
@@ -20,20 +19,4 @@ abstract class BaseMVINavigationActivity<UserAction : ViewAction, UIViewState : 
         }
     }
 
-    // TODO put this in navigator
-    fun navigateTo(
-        fragment: Fragment,
-        backStack: String? = null,
-        replace: Boolean = false,
-        enterAnimation: Int = R.anim.slide_in_right,
-        exitAnimation: Int = R.anim.slide_out_right,
-        clearStack: Boolean = true,
-        clearTop: Boolean = false
-    ) {
-        if (clearStack) clearBackStack(backStack) else if (clearTop) clearTop(fragment)
-        if (replace)
-            replaceFragment(R.id.fcv_fragment, fragment, enterAnimation, exitAnimation)
-        else
-            addFragment(R.id.fcv_fragment, fragment, enterAnimation, exitAnimation, backStack)
-    }
 }

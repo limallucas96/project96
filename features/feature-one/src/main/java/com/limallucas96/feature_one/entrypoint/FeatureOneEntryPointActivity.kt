@@ -4,11 +4,16 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVINavigationActivity
 import com.limallucas96.feature_one.catprofile.CatProfileFragment
+import com.limallucas96.navigator.fragment.FragmentNavigator
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FeatureOneEntryPointActivity :
     BaseMVINavigationActivity<FeatureOneEntryPointAction, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffect>() {
+
+    @set:Inject
+    lateinit var navigator: FragmentNavigator
 
     override val viewModel: FeatureOneEntryPointViewModel by viewModels()
 
@@ -24,7 +29,7 @@ class FeatureOneEntryPointActivity :
     override fun onSideEffectReceived(sideEffect: FeatureOneEntryPointSideEffect) {
         when (sideEffect) {
             is FeatureOneEntryPointSideEffect.NavigateToFeatureOneFragment -> {
-                navigateTo(CatProfileFragment.newInstance(), sideEffect.backStack)
+                navigator.navigateTo(this, CatProfileFragment.newInstance(), sideEffect.backStack)
             }
         }
     }

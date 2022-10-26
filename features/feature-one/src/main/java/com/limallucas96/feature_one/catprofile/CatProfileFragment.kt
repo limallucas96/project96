@@ -6,13 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
-import com.limallucas96.core_presentation.mvi.BaseMVINavigationFragment
+import com.limallucas96.core_presentation.mvi.BaseMVIFragment
 import com.limallucas96.feature_one.catpicker.CatPickerFragment
 import com.limallucas96.feature_one.databinding.FragmentCatProfileBinding
+import com.limallucas96.navigator.fragment.FragmentNavigator
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class CatProfileFragment :
-    BaseMVINavigationFragment<FragmentCatProfileBinding, CatProfileAction, CatProfileViewState, CatProfileSideEffect>() {
+    BaseMVIFragment<FragmentCatProfileBinding, CatProfileAction, CatProfileViewState, CatProfileSideEffect>() {
+
+    @set:Inject
+    lateinit var navigator: FragmentNavigator
 
     override val viewModel: CatProfileViewModel by viewModels()
 
@@ -30,7 +37,8 @@ class CatProfileFragment :
     override fun handleSideEffect(sideEffect: CatProfileSideEffect) {
         when (sideEffect) {
             is CatProfileSideEffect.NavigateToCatPicker -> {
-                navigateTo(
+                navigator.navigateTo(
+                    activity,
                     CatPickerFragment.newInstance(sideEffect.catName, sideEffect.catAge),
                     sideEffect.backStack
                 )

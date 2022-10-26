@@ -6,6 +6,8 @@ import com.limallucas96.navigator.featureone.FeatureOneNavigator
 import com.limallucas96.navigator.featureone.FeatureOneNavigatorImpl
 import com.limallucas96.navigator.featuretwo.FeatureTwoNavigator
 import com.limallucas96.navigator.featuretwo.FeatureTwoNavigatorImpl
+import com.limallucas96.navigator.fragment.FragmentNavigator
+import com.limallucas96.navigator.fragment.FragmentNavigatorImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,6 +34,12 @@ object NavigatorModules {
     @Singleton
     fun providesFeatureHomeNavigator(): FeatureHomeNavigator {
         return FeatureHomeNavigatorImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun providesFragmentNavigator(): FragmentNavigator {
+        return FragmentNavigatorImpl()
     }
 
 }

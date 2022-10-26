@@ -3,6 +3,8 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 dependencies {
 
+    implementation project(path: ':libraries:uikit')
+
     //Hilt
     implementation rootProject.libraries.hiltAndroid
     kapt rootProject.libraries.hiltCompiler

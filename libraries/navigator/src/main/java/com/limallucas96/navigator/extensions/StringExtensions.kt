@@ -1,4 +1,4 @@
-package com.limallucas96.navigator.commons
+package com.limallucas96.navigator.extensions
 
 import android.content.Context
 import android.content.Intent

@@ -2,7 +2,7 @@ package com.limallucas96.navigator.featureone
 
 import android.content.Context
 import android.content.Intent
-import com.limallucas96.navigator.commons.toIntent
+import com.limallucas96.navigator.extensions.toIntent
 import javax.inject.Inject
 
 internal class FeatureOneNavigatorImpl @Inject constructor() : FeatureOneNavigator {

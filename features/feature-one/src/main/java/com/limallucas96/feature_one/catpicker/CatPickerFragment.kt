@@ -6,17 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import com.limallucas96.core_presentation.mvi.BaseMVINavigationFragment
+import com.limallucas96.core_presentation.mvi.BaseMVIFragment
 import com.limallucas96.feature_one.catsummary.CatSummaryFragment
 import com.limallucas96.feature_one.databinding.FragmentCatPickerBinding
+import com.limallucas96.navigator.fragment.FragmentNavigator
 import com.limallucas96.uikit.extensions.argument
 import com.limallucas96.uikit.extensions.loadUrl
 import com.limallucas96.uikit.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CatPickerFragment :
-    BaseMVINavigationFragment<FragmentCatPickerBinding, CatPickerAction, CatPickerViewState, CatPickerSideEffect>() {
+    BaseMVIFragment<FragmentCatPickerBinding, CatPickerAction, CatPickerViewState, CatPickerSideEffect>() {
+
+    @set:Inject
+    lateinit var navigator: FragmentNavigator
 
     override val viewModel: CatPickerViewModel by viewModels()
 
@@ -38,7 +43,8 @@ class CatPickerFragment :
     override fun handleSideEffect(sideEffect: CatPickerSideEffect) {
         when (sideEffect) {
             is CatPickerSideEffect.NavigateToCatSummary -> {
-                navigateTo(
+                navigator.navigateTo(
+                    activity,
                     CatSummaryFragment.newInstance(
                         sideEffect.catName,
                         sideEffect.catAge,

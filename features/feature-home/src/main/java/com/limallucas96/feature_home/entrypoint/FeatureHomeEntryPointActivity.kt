@@ -4,11 +4,17 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVINavigationActivity
 import com.limallucas96.feature_home.home.HomeFragment
+import com.limallucas96.navigator.featurehome.FeatureHomeNavigator
+import com.limallucas96.navigator.fragment.FragmentNavigator
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FeatureHomeEntryPointActivity :
     BaseMVINavigationActivity<FeatureHomeEntryPointAction, FeatureHomeEntryPointViewState, FeatureHomeEntryPointSideEffect>() {
+
+    @set:Inject
+    lateinit var navigator: FragmentNavigator
 
     override val viewModel: FeatureHomeEntryPointViewModel by viewModels()
 
@@ -25,7 +31,8 @@ class FeatureHomeEntryPointActivity :
     override fun onSideEffectReceived(sideEffect: FeatureHomeEntryPointSideEffect) {
         when (sideEffect) {
             FeatureHomeEntryPointSideEffect.NavigateToHomeFragment -> {
-                navigateTo(
+                navigator.navigateTo(
+                    this,
                     fragment = HomeFragment.newInstance()
                 )
             }

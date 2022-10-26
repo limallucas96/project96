@@ -1,4 +1,4 @@
-package com.limallucas96.core_presentation.extensions
+package com.limallucas96.navigator.extensions
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
