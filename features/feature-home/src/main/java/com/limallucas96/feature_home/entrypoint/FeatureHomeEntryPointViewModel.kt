@@ -7,8 +7,8 @@ class FeatureHomeEntryPointViewModel :
 
     override fun createInitialViewState() = FeatureHomeEntryPointViewState()
 
-    override fun handleUserAction(event: FeatureHomeEntryPointAction, currentState: FeatureHomeEntryPointViewState) {
-        when (event) {
+    override fun handleUserAction(action: FeatureHomeEntryPointAction, currentState: FeatureHomeEntryPointViewState) {
+        when (action) {
             FeatureHomeEntryPointAction.ViewScreen -> emitSideEffect(FeatureHomeEntryPointSideEffect.NavigateToHomeFragment)
         }
     }

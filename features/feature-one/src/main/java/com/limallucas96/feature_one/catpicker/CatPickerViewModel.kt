@@ -18,11 +18,8 @@ class CatPickerViewModel @Inject constructor(
 
     override fun createInitialViewState() = CatPickerViewState()
 
-    override fun handleUserAction(
-        event: CatPickerAction,
-        currentState: CatPickerViewState
-    ) {
-        when (event) {
+    override fun handleUserAction(action: CatPickerAction, currentState: CatPickerViewState) {
+        when (action) {
             CatPickerAction.ViewScreen,
             CatPickerAction.ButtonShortNewCat,
             CatPickerAction.Retry -> {
@@ -36,7 +33,7 @@ class CatPickerViewModel @Inject constructor(
                 )
             }
             is CatPickerAction.InitView -> {
-                updateViewState { copy(catName = event.catName, catAge = event.catAge) }
+                updateViewState { copy(catName = action.catName, catAge = action.catAge) }
             }
         }
     }

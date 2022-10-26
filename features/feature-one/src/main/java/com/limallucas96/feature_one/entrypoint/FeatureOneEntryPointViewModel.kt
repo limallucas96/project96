@@ -7,11 +7,8 @@ class FeatureOneEntryPointViewModel :
 
     override fun createInitialViewState() = FeatureOneEntryPointViewState()
 
-    override fun handleUserAction(
-        event: FeatureOneEntryPointAction,
-        currentState: FeatureOneEntryPointViewState
-    ) {
-        when (event) {
+    override fun handleUserAction(action: FeatureOneEntryPointAction, currentState: FeatureOneEntryPointViewState) {
+        when (action) {
             FeatureOneEntryPointAction.ViewScreen -> {
                 emitSideEffect(
                     FeatureOneEntryPointSideEffect.NavigateToFeatureOneFragment(

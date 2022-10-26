@@ -7,16 +7,13 @@ class CatProfileViewModel :
 
     override fun createInitialViewState() = CatProfileViewState()
 
-    override fun handleUserAction(
-        event: CatProfileAction,
-        currentState: CatProfileViewState
-    ) {
-        when (event) {
+    override fun handleUserAction(action: CatProfileAction, currentState: CatProfileViewState) {
+        when (action) {
             is CatProfileAction.OnCatNameChanged -> {
-                validateCatProfile(currentState.copy(catName = event.catName))
+                validateCatProfile(currentState.copy(catName = action.catName))
             }
             is CatProfileAction.OnCatAgeChanged -> {
-                validateCatProfile(currentState.copy(catAge = event.catAge))
+                validateCatProfile(currentState.copy(catAge = action.catAge))
             }
             CatProfileAction.ButtonContinueClick -> {
                 emitSideEffect(

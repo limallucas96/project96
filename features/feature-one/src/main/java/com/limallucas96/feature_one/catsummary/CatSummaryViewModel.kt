@@ -19,8 +19,8 @@ class CatSummaryViewModel @Inject constructor(
 
     override fun createInitialViewState() = CatSummaryViewState()
 
-    override fun handleUserAction(event: CatSummaryAction, currentState: CatSummaryViewState) {
-        when (event) {
+    override fun handleUserAction(action: CatSummaryAction, currentState: CatSummaryViewState) {
+        when (action) {
             CatSummaryAction.ButtonGoToHomeClick -> {
                 emitSideEffect(CatSummarySideEffect.NavigateToHome)
             }
@@ -34,9 +34,9 @@ class CatSummaryViewModel @Inject constructor(
             is CatSummaryAction.ViewScreen -> {
                 updateViewState {
                     copy(
-                        catName = resourcesProvider.getString(R.string.my_cat_name, event.catName),
-                        catAge = resourcesProvider.getString(R.string.my_cat_age, event.catAge),
-                        catPhotoUrl = event.catPhotoUrl
+                        catName = resourcesProvider.getString(R.string.my_cat_name, action.catName),
+                        catAge = resourcesProvider.getString(R.string.my_cat_age, action.catAge),
+                        catPhotoUrl = action.catPhotoUrl
                     )
                 }
             }

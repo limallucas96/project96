@@ -28,7 +28,7 @@ abstract class BaseMVIViewModel<UserAction : ViewAction, UIViewState : ViewState
 
     abstract fun createInitialViewState(): UIViewState
 
-    abstract fun handleUserAction(event: UserAction, currentState: UIViewState)
+    abstract fun handleUserAction(action: UserAction, currentState: UIViewState)
 
     protected fun updateViewState(reduce: UIViewState.() -> UIViewState) {
         val newState = currentState.reduce()
