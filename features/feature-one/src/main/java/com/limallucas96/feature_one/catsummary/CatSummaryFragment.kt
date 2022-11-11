@@ -9,6 +9,7 @@ import com.limallucas96.core_presentation.mvi.BaseMVIFragment
 import com.limallucas96.feature_one.R
 import com.limallucas96.feature_one.catprofile.CatProfileFragment
 import com.limallucas96.feature_one.databinding.FragmentCatSummaryBinding
+import com.limallucas96.navigator.extensions.redirectToActivity
 import com.limallucas96.navigator.featurehome.FeatureHomeNavigator
 import com.limallucas96.navigator.fragment.FragmentNavigator
 import com.limallucas96.uikit.extensions.argument
@@ -52,11 +53,7 @@ class CatSummaryFragment :
     override fun handleSideEffect(sideEffect: CatSummarySideEffect) {
         when (sideEffect) {
             CatSummarySideEffect.NavigateToHome -> {
-                // TODO check about back stack when navigating back to home
-                activity?.let {
-                    startActivity(featureHomeNavigator.newIntent(it))
-                    it.finish()
-                }
+                activity?.let { it.redirectToActivity(featureHomeNavigator.newIntent(it), finish = true) }
             }
             is CatSummarySideEffect.NavigateToCatProfile -> {
                 navigator.navigateTo(
