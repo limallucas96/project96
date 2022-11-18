@@ -2,9 +2,11 @@ package com.limallucas96.core_presentation.mvi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 abstract class BaseMVIViewModel<UserAction : ViewAction, UIViewState : ViewState, UISideEffect : SideEffect> :
     ViewModel() {

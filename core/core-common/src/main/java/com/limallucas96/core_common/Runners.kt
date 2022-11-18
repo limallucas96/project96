@@ -16,18 +16,13 @@ suspend fun <T> runSafeCall(dispatcher: CoroutineDispatcher, func: suspend () ->
         }
     }
 
-//Type mismatch.
-//Required:
-//Flow<Result<List<Cat>>>
-//Found:
-//Flow<Result<Flow<List<Cat>>>>
-
-//func: suspend () -> T
-
 suspend fun <T> runFlowableSafeCall(
     dispatcher: CoroutineDispatcher,
-    func: suspend () -> T
-): Flow<Result<T?>> {
-
-    return flowOf(Result.success(null))
+    func:  suspend () -> Flow<T>
+): Flow<Result<T>> {
+    return func().map {
+        Result.success(it)
+    }.catch {
+        Result.failure<Throwable>(it)
+    }.flowOn(dispatcher)
 }

@@ -1,15 +1,18 @@
 package com.limallucas96.feature_home.home
 
 import androidx.lifecycle.viewModelScope
+import com.limallucas96.core_data.repositories.pet.PetRepository
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import com.limallucas96.core_presentation.resourceprovider.ResourcesProvider
 import com.limallucas96.feature_home.R
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeFragmentViewModel @Inject constructor(
+    private val petRepository: PetRepository,
     private val resourcesProvider: ResourcesProvider
 ) : BaseMVIViewModel<HomeFragmentAction, HomeFragmentViewState, HomeFragmentSideEffect>() {
 
@@ -25,9 +28,17 @@ class HomeFragmentViewModel @Inject constructor(
 
     private fun fetchPets() {
         viewModelScope.launch {
-            // TODO Fetch pet counter from sharedPref
-            val petCounter = resourcesProvider.getString(R.string.pet_counter, "10")
-            updateViewState { copy(petCounter = petCounter) }
+            petRepository.getPets().collectLatest { petResult ->
+                petResult.fold(
+                    onSuccess = { pets ->
+                        val petCounter = resourcesProvider.getString(R.string.pet_counter, pets.size)
+                        updateViewState { copy(petCounter = petCounter) }
+                    },
+                    onFailure = {
+                        updateViewState { copy(petCounter = resourcesProvider.getString(R.string.pet_counter_error)) }
+                    }
+                )
+            }
         }
     }
 }

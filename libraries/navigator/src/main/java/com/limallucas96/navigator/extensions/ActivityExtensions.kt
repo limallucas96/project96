@@ -8,5 +8,7 @@ fun Activity.redirectToActivity(intent: Intent, clearTop: Boolean = false, singl
     if (singleTop) this.intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
     this.startActivity(intent)
 
-    if (finish) this.finish()
+    if (finish) {
+        this.finish()
+    }
 }

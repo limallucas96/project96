@@ -1,3 +1,4 @@
 <resources>
     <string name="pet_counter">pet counter: %s</string>
+    <string name="pet_counter_error">We could not retrieve any pet from our database</string>
 </resources>
