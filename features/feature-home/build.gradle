@@ -6,5 +6,5 @@ apply plugin: 'dagger.hilt.android.plugin'
 dependencies {
     /** Add any particular dependency for this module here **/
 
-    implementation project(path: ':analytics')
+    implementation project(path: ':libraries:analytics')
 }
