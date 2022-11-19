@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
+      <module name="MVI96.analytics" target="11" />
       <module name="MVI96.app" target="11" />
       <module name="MVI96.core-common" target="11" />
       <module name="MVI96.core-data" target="11" />

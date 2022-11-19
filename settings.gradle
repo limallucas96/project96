@@ -34,3 +34,4 @@ include 'models:data-model'
 
 include 'libraries:uikit'
 include 'libraries:navigator'
+include ':analytics'

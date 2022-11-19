@@ -1,0 +1,16 @@
+apply from: "$rootDir/common-android-library.gradle"
+apply plugin: 'dagger.hilt.android.plugin'
+
+dependencies {
+
+    //Hilt
+    implementation rootProject.libraries.hiltAndroid
+    kapt rootProject.libraries.hiltCompiler
+
+    implementation rootProject.libraries.androidXCoreKtx
+
+    testImplementation rootProject.libraries.junit
+    androidTestImplementation rootProject.libraries.androidXJunit
+    androidTestImplementation rootProject.libraries.androidXEspresso
+
+}
