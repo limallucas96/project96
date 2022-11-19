@@ -59,8 +59,7 @@ class CatPickerFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
-        viewModel.dispatch(CatPickerAction.InitView(catName, catAge))
-        viewModel.dispatch(CatPickerAction.ViewScreen)
+        viewModel.dispatch(CatPickerAction.OnCreate(catName, catAge))
     }
 
     private fun setupListeners() {

@@ -71,7 +71,7 @@ class CatSummaryFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
-        viewModel.dispatch(CatSummaryAction.ViewScreen(catName, catAge, catPhotoUrl))
+        viewModel.dispatch(CatSummaryAction.OnCreate(catName, catAge, catPhotoUrl))
     }
 
     private fun setupListeners() {

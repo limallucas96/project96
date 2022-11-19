@@ -31,7 +31,7 @@ class HomeFragmentViewModelTest :
     fun `when ViewScreen is dispatched, then assert correct view state`() =
         assertViewState(
             expectedViewState = HomeFragmentViewState("pet counter: 10"),
-            actions = listOf(HomeFragmentAction.ViewScreen),
+            actions = listOf(HomeFragmentAction.OnCreate),
             initializeMocks = { mockStrings() }
         )
 

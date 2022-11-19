@@ -8,7 +8,7 @@ class FeatureHomeEntryPointViewState(
 ) : ViewState
 
 sealed class FeatureHomeEntryPointAction : ViewAction {
-    object ViewScreen : FeatureHomeEntryPointAction()
+    object OnCreate : FeatureHomeEntryPointAction()
 }
 
 sealed class FeatureHomeEntryPointSideEffect : SideEffect {

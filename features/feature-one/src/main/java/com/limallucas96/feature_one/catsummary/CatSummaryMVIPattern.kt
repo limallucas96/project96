@@ -12,7 +12,7 @@ data class CatSummaryViewState(
 ) : ViewState
 
 sealed class CatSummaryAction : ViewAction {
-    data class ViewScreen(
+    data class OnCreate(
         val catName: String,
         val catAge: String,
         val catPhotoUrl: String

@@ -19,7 +19,7 @@ class FeatureOneEntryPointActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.dispatch(FeatureOneEntryPointAction.ViewScreen)
+        viewModel.dispatch(FeatureOneEntryPointAction.OnCreate)
     }
 
     override fun onViewStateUpdated(viewState: FeatureOneEntryPointViewState) {
@@ -28,7 +28,7 @@ class FeatureOneEntryPointActivity :
 
     override fun onSideEffectReceived(sideEffect: FeatureOneEntryPointSideEffect) {
         when (sideEffect) {
-            is FeatureOneEntryPointSideEffect.NavigateToFeatureOneFragment -> {
+            is FeatureOneEntryPointSideEffect.NavigateToCatProfileFragment -> {
                 navigator.navigateTo(this, CatProfileFragment.newInstance(), sideEffect.backStack)
             }
         }

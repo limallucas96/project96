@@ -20,9 +20,13 @@ class HomeFragmentViewModel @Inject constructor(
 
     override fun handleUserAction(action: HomeFragmentAction, currentState: HomeFragmentViewState) {
         when (action) {
-            HomeFragmentAction.PrimaryButtonClick -> emitSideEffect(HomeFragmentSideEffect.NavigateToFeatureOne)
-            HomeFragmentAction.SecondaryButtonClick -> emitSideEffect(HomeFragmentSideEffect.NavigateToFeatureTwo)
-            HomeFragmentAction.ViewScreen -> fetchPets()
+            HomeFragmentAction.PrimaryButtonClick -> {
+                emitSideEffect(HomeFragmentSideEffect.NavigateToFeatureOne)
+            }
+            HomeFragmentAction.SecondaryButtonClick -> {
+                emitSideEffect(HomeFragmentSideEffect.NavigateToFeatureTwo)
+            }
+            HomeFragmentAction.OnCreate -> fetchPets()
         }
     }
 

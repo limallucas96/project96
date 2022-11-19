@@ -9,9 +9,9 @@ class FeatureOneEntryPointViewModel :
 
     override fun handleUserAction(action: FeatureOneEntryPointAction, currentState: FeatureOneEntryPointViewState) {
         when (action) {
-            FeatureOneEntryPointAction.ViewScreen -> {
+            FeatureOneEntryPointAction.OnCreate -> {
                 emitSideEffect(
-                    FeatureOneEntryPointSideEffect.NavigateToFeatureOneFragment(
+                    FeatureOneEntryPointSideEffect.NavigateToCatProfileFragment(
                         FEATURE_ONE_ACTIVITY_BACK_STACK
                     )
                 )

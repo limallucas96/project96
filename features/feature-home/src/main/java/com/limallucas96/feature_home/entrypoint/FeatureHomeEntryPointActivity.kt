@@ -20,7 +20,7 @@ class FeatureHomeEntryPointActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.dispatch(FeatureHomeEntryPointAction.ViewScreen)
+        viewModel.dispatch(FeatureHomeEntryPointAction.OnCreate)
     }
 
     override fun onViewStateUpdated(viewState: FeatureHomeEntryPointViewState) {

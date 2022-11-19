@@ -9,7 +9,7 @@ data class HomeFragmentViewState(
 ) : ViewState
 
 sealed class HomeFragmentAction : ViewAction {
-    object ViewScreen : HomeFragmentAction()
+    object OnCreate : HomeFragmentAction()
     object PrimaryButtonClick : HomeFragmentAction()
     object SecondaryButtonClick : HomeFragmentAction()
 }

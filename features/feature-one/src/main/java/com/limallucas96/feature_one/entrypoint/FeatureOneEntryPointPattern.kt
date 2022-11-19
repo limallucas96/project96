@@ -7,10 +7,10 @@ import com.limallucas96.core_presentation.mvi.ViewState
 class FeatureOneEntryPointViewState : ViewState
 
 sealed class FeatureOneEntryPointAction : ViewAction {
-    object ViewScreen : FeatureOneEntryPointAction()
+    object OnCreate : FeatureOneEntryPointAction()
 }
 
 sealed class FeatureOneEntryPointSideEffect : SideEffect {
-    data class NavigateToFeatureOneFragment(val backStack: String = "") :
+    data class NavigateToCatProfileFragment(val backStack: String = "") :
         FeatureOneEntryPointSideEffect()
 }

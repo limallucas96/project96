@@ -18,7 +18,7 @@ class SplashViewModelTest :
     @Test
     fun `when ViewScreen is dispatched, then navigate to Home`() = assertSideEffect(
         expectedSideEffect = SplashSideEffect.NavigateToHome,
-        actions = listOf(SplashAction.ViewScreen)
+        actions = listOf(SplashAction.OnCreate)
     )
 
 }

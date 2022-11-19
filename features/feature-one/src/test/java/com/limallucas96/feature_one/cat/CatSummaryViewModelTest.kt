@@ -47,7 +47,7 @@
 //                catPhotoUrl = "https"
 //            ),
 //            actions = listOf(
-//                CatSummaryAction.ViewScreen(
+//                CatSummaryAction.OnCreate(
 //                    catName = "Cat",
 //                    catAge = "1",
 //                    catPhotoUrl = "https"

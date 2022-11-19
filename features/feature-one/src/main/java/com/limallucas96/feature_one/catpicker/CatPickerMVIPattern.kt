@@ -13,11 +13,10 @@ data class CatPickerViewState(
 ) : ViewState
 
 sealed class CatPickerAction : ViewAction {
-    data class InitView(
+    data class OnCreate(
         val catName: String,
         val catAge: String,
     ) : CatPickerAction()
-    object ViewScreen : CatPickerAction()
     object ButtonChooseCatClick : CatPickerAction()
     object ButtonShortNewCat : CatPickerAction()
     object Retry : CatPickerAction()

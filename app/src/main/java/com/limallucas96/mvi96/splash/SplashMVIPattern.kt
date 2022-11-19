@@ -4,10 +4,10 @@ import com.limallucas96.core_presentation.mvi.SideEffect
 import com.limallucas96.core_presentation.mvi.ViewAction
 import com.limallucas96.core_presentation.mvi.ViewState
 
-class SplashViewState() : ViewState
+class SplashViewState : ViewState
 
 sealed class SplashAction : ViewAction {
-    object ViewScreen : SplashAction()
+    object OnCreate : SplashAction()
 }
 
 sealed class SplashSideEffect : SideEffect {

@@ -21,7 +21,7 @@ class SplashActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.dispatch(SplashAction.ViewScreen)
+        viewModel.dispatch(SplashAction.OnCreate)
     }
 
     override fun onViewStateUpdated(viewState: SplashViewState) {

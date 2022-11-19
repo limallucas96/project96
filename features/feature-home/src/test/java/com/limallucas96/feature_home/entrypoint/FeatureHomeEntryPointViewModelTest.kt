@@ -18,7 +18,7 @@ class FeatureHomeEntryPointViewModelTest :
     @Test
     fun `when ViewScreen is dispatched, then assert navigate to home fragment is emitted`() = assertSideEffect(
         expectedSideEffect = FeatureHomeEntryPointSideEffect.NavigateToHomeFragment,
-        actions = listOf(FeatureHomeEntryPointAction.ViewScreen)
+        actions = listOf(FeatureHomeEntryPointAction.OnCreate)
     )
 
 }

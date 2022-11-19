@@ -50,7 +50,7 @@ class HomeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
-        viewModel.dispatch(HomeFragmentAction.ViewScreen)
+        viewModel.dispatch(HomeFragmentAction.OnCreate)
     }
 
 

@@ -11,7 +11,7 @@ class SplashViewModel : BaseMVIViewModel<SplashAction, SplashViewState, SplashSi
 
     override fun handleUserAction(action: SplashAction, currentState: SplashViewState) {
         when (action) {
-            SplashAction.ViewScreen -> navigateToHome()
+            SplashAction.OnCreate -> navigateToHome()
         }
     }
 

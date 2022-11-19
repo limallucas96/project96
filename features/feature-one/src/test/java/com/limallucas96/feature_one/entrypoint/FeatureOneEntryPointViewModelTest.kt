@@ -14,10 +14,10 @@ class FeatureOneEntryPointViewModelTest :
 
     @Test
     fun `when ViewScreen is dispatched, then assert right navigation is emitted`() = assertSideEffect(
-        expectedSideEffect = FeatureOneEntryPointSideEffect.NavigateToFeatureOneFragment(
+        expectedSideEffect = FeatureOneEntryPointSideEffect.NavigateToCatProfileFragment(
             "FEATURE_ONE_ACTIVITY_BACK_STACK"
         ),
-        actions = listOf(FeatureOneEntryPointAction.ViewScreen)
+        actions = listOf(FeatureOneEntryPointAction.OnCreate)
     )
 
 }

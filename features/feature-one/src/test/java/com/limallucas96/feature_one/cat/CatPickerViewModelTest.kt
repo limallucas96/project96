@@ -43,7 +43,7 @@ class CatPickerViewModelTest :
     fun `Given a success api call, when ViewScreen, ButtonShortNewCat or Retry are dispatched, then assert view is loading`() =
         assertViewState(
             expectedViewState = mockCatPickerViewState.copy(isLoading = true),
-            actions = listOf(CatPickerAction.ViewScreen),
+            actions = listOf(CatPickerAction.OnCreate),
             initializeMocks = {
                 mockSuccessGetCatsApiCall()
             }
@@ -56,7 +56,7 @@ class CatPickerViewModelTest :
                 isLoading = false,
                 catUrlPhoto = "https",
             ),
-            actions = listOf(CatPickerAction.ViewScreen),
+            actions = listOf(CatPickerAction.OnCreate),
             initializeMocks = {
                 mockSuccessGetCatsApiCall()
             },
@@ -71,7 +71,7 @@ class CatPickerViewModelTest :
                 isLoading = false,
                 isError = true,
             ),
-            actions = listOf(CatPickerAction.ViewScreen),
+            actions = listOf(CatPickerAction.OnCreate),
             initializeMocks = {
                 mockErrorGetCatsApiCall()
             },

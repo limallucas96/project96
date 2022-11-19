@@ -20,7 +20,6 @@ class CatPickerViewModel @Inject constructor(
 
     override fun handleUserAction(action: CatPickerAction, currentState: CatPickerViewState) {
         when (action) {
-            CatPickerAction.ViewScreen,
             CatPickerAction.ButtonShortNewCat,
             CatPickerAction.Retry -> {
                 fetchCats()
@@ -32,8 +31,9 @@ class CatPickerViewModel @Inject constructor(
                     currentState.catUrlPhoto
                 )
             }
-            is CatPickerAction.InitView -> {
+            is CatPickerAction.OnCreate -> {
                 updateViewState { copy(catName = action.catName, catAge = action.catAge) }
+                fetchCats()
             }
         }
     }

@@ -31,7 +31,7 @@ class CatSummaryViewModel @Inject constructor(
                     )
                 )
             }
-            is CatSummaryAction.ViewScreen -> {
+            is CatSummaryAction.OnCreate -> {
                 updateViewState {
                     copy(
                         catName = resourcesProvider.getString(R.string.my_cat_name, action.catName),
