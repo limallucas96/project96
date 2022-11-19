@@ -1,6 +1,7 @@
 package com.limallucas96.feature_home.home
 
 import androidx.lifecycle.viewModelScope
+import com.example.abtest.Abtest
 import com.limallucas96.core_data.repositories.pet.PetRepository
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import com.limallucas96.core_presentation.resourceprovider.ResourcesProvider
@@ -12,6 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeFragmentViewModel @Inject constructor(
+    private val abtest: Abtest,
     private val petRepository: PetRepository,
     private val resourcesProvider: ResourcesProvider
 ) : BaseMVIViewModel<HomeFragmentAction, HomeFragmentViewState, HomeFragmentSideEffect>() {
@@ -36,10 +38,23 @@ class HomeFragmentViewModel @Inject constructor(
                 petResult.fold(
                     onSuccess = { pets ->
                         val petCounter = resourcesProvider.getString(R.string.pet_counter, pets.size)
-                        updateViewState { copy(petCounter = petCounter) }
+                        val lastPet =
+                            resourcesProvider.getString(R.string.last_pet_created, pets.lastOrNull()?.name.orEmpty())
+                        updateViewState {
+                            copy(
+                                petCounter = petCounter,
+                                lastPet = lastPet,
+                                showLastPet = abtest.showLastPet()
+                            )
+                        }
                     },
                     onFailure = {
-                        updateViewState { copy(petCounter = resourcesProvider.getString(R.string.pet_counter_error)) }
+                        updateViewState {
+                            copy(
+                                petCounter = resourcesProvider.getString(R.string.pet_counter_error),
+                                showLastPet = false
+                            )
+                        }
                     }
                 )
             }

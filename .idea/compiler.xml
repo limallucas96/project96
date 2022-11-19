@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
+      <module name="MVI96.abtest" target="11" />
       <module name="MVI96.analytics" target="11" />
       <module name="MVI96.app" target="11" />
       <module name="MVI96.core-common" target="11" />
@@ -22,6 +23,8 @@
       <module name="MVI96.features.feature-home" target="11" />
       <module name="MVI96.features.feature-one" target="11" />
       <module name="MVI96.features.feature-two" target="11" />
+      <module name="MVI96.libraries.abtest" target="11" />
+      <module name="MVI96.libraries.analytics" target="11" />
       <module name="MVI96.libraries.navigator" target="11" />
       <module name="MVI96.libraries.uikit" target="11" />
       <module name="MVI96.mylibrary" target="11" />

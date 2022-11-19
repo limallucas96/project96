@@ -5,7 +5,9 @@ import com.limallucas96.core_presentation.mvi.ViewAction
 import com.limallucas96.core_presentation.mvi.ViewState
 
 data class HomeFragmentViewState(
-    val petCounter: String = ""
+    val petCounter: String = "",
+    val lastPet: String = "",
+    val showLastPet: Boolean = false
 ) : ViewState
 
 sealed class HomeFragmentAction : ViewAction {

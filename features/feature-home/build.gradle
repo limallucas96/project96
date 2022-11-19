@@ -7,4 +7,5 @@ dependencies {
     /** Add any particular dependency for this module here **/
 
     implementation project(path: ':libraries:analytics')
+    implementation project(path: ':libraries:abtest')
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVIFragment
 import com.limallucas96.feature_home.databinding.FragmentHomeBinding
@@ -32,7 +33,11 @@ class HomeFragment :
     }
 
     override fun renderViewState(viewState: HomeFragmentViewState) {
-        binding.textViewPetCounter.text = viewState.petCounter
+        binding.run {
+            textViewPetCounter.text = viewState.petCounter
+            textViewLastCat.text = viewState.lastPet
+            textViewLastCat.isVisible = viewState.showLastPet
+        }
     }
 
     override fun handleSideEffect(sideEffect: HomeFragmentSideEffect) {

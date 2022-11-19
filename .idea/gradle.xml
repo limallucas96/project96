@@ -10,7 +10,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/analytics" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/core-common" />
@@ -23,6 +22,8 @@
             <option value="$PROJECT_DIR$/features/feature-one" />
             <option value="$PROJECT_DIR$/features/feature-two" />
             <option value="$PROJECT_DIR$/libraries" />
+            <option value="$PROJECT_DIR$/libraries/abtest" />
+            <option value="$PROJECT_DIR$/libraries/analytics" />
             <option value="$PROJECT_DIR$/libraries/navigator" />
             <option value="$PROJECT_DIR$/libraries/uikit" />
             <option value="$PROJECT_DIR$/models" />
