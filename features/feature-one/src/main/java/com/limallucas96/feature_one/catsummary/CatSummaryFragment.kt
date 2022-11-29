@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVIFragment
 import com.limallucas96.feature_one.R
 import com.limallucas96.feature_one.catprofile.CatProfileFragment
 import com.limallucas96.feature_one.databinding.FragmentCatSummaryBinding
+import com.limallucas96.feature_one.entrypoint.FeatureOneEntryPointAction
+import com.limallucas96.feature_one.entrypoint.FeatureOneEntryPointViewModel
+import com.limallucas96.feature_one.enums.CatProfileProgress
 import com.limallucas96.navigator.extensions.redirectToActivity
 import com.limallucas96.navigator.featurehome.FeatureHomeNavigator
 import com.limallucas96.navigator.fragment.FragmentNavigator
@@ -30,6 +34,9 @@ class CatSummaryFragment :
     lateinit var featureHomeNavigator: FeatureHomeNavigator
 
     override val viewModel: CatSummaryViewModel by viewModels()
+
+    // TODO Check if there is a smarter way to put this into base
+    private val activityViewModel: FeatureOneEntryPointViewModel by activityViewModels()
 
     private val catName: String by argument(ARG_CAT_NAME) { "" }
     private val catAge: String by argument(ARG_CAT_AGE) { "" }
@@ -71,7 +78,13 @@ class CatSummaryFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
+        activityViewModel.dispatch(FeatureOneEntryPointAction.UpdateToolbar(CatProfileProgress.CAT_SUMMARY_STEP))
         viewModel.dispatch(CatSummaryAction.OnCreate(catName, catAge, catPhotoUrl))
+    }
+
+    override fun onBackPressedCalled(performBackPress: Boolean) {
+        super.onBackPressedCalled(performBackPress)
+        activityViewModel.dispatch(FeatureOneEntryPointAction.UpdateToolbar(CatProfileProgress.CAT_PICKER_STEP))
     }
 
     private fun setupListeners() {

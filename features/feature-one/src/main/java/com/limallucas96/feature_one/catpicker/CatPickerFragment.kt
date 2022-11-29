@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVIFragment
 import com.limallucas96.feature_one.catsummary.CatSummaryFragment
 import com.limallucas96.feature_one.databinding.FragmentCatPickerBinding
+import com.limallucas96.feature_one.entrypoint.FeatureOneEntryPointAction
+import com.limallucas96.feature_one.entrypoint.FeatureOneEntryPointViewModel
+import com.limallucas96.feature_one.enums.CatProfileProgress
 import com.limallucas96.navigator.fragment.FragmentNavigator
 import com.limallucas96.uikit.extensions.argument
 import com.limallucas96.uikit.extensions.loadUrl
@@ -24,6 +28,9 @@ class CatPickerFragment :
     lateinit var navigator: FragmentNavigator
 
     override val viewModel: CatPickerViewModel by viewModels()
+
+    // TODO Check if there is a smarter way to put this into base
+    private val activityViewModel: FeatureOneEntryPointViewModel by activityViewModels()
 
     private val catName: String by argument(ARG_CAT_NAME) { "" }
     private val catAge: String by argument(ARG_CAT_AGE) { "" }
@@ -59,7 +66,13 @@ class CatPickerFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
+        activityViewModel.dispatch(FeatureOneEntryPointAction.UpdateToolbar(CatProfileProgress.CAT_PICKER_STEP))
         viewModel.dispatch(CatPickerAction.OnCreate(catName, catAge))
+    }
+
+    override fun onBackPressedCalled(performBackPress: Boolean) {
+        super.onBackPressedCalled(performBackPress)
+        activityViewModel.dispatch(FeatureOneEntryPointAction.UpdateToolbar(CatProfileProgress.CAT_PROFILE_STEP))
     }
 
     private fun setupListeners() {

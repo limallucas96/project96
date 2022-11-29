@@ -2,7 +2,10 @@ package com.limallucas96.feature_one.entrypoint
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.limallucas96.core_presentation.mvi.BaseMVINavigationActivity
+import com.limallucas96.feature_one.enums.CatProfileProgress
+import com.limallucas96.feature_one.enums.CatProfileProgress.Companion.getSumOfSteps
 import com.limallucas96.feature_one.catprofile.CatProfileFragment
 import com.limallucas96.navigator.fragment.FragmentNavigator
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +26,11 @@ class FeatureOneEntryPointActivity :
     }
 
     override fun onViewStateUpdated(viewState: FeatureOneEntryPointViewState) {
-        // nothing to do here
+        binding.progressBar.isVisible = viewState.toolbarProgress.step > 0
+        binding.progressBar.progress = viewState.toolbarProgress.step
+        binding.progressBar.max = viewState.toolbarProgress.getSumOfSteps()
+        binding.toolbarNavigation.isVisible = viewState.toolbarProgress != CatProfileProgress.NONE
+        binding.toolbarNavigation.title = getString(viewState.toolbarProgress.stringRes)
     }
 
     override fun onSideEffectReceived(sideEffect: FeatureOneEntryPointSideEffect) {

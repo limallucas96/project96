@@ -24,6 +24,9 @@ class FeatureOneEntryPointViewModel @Inject constructor(
                     )
                 )
             }
+            is FeatureOneEntryPointAction.UpdateToolbar -> {
+                updateViewState { copy(toolbarProgress = action.step) }
+            }
         }
     }
 

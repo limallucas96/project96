@@ -15,7 +15,7 @@ abstract class BaseMVINavigationActivity<UserAction : ViewAction, UIViewState : 
                 removeAllFragmentsFromBackStack()
                 finish()
             }
-            else -> super.onBackPressed()
+            else -> onBackPressedDispatcher.onBackPressed()
         }
     }
 

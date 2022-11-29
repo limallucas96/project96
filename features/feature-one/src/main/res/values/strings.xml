@@ -4,4 +4,8 @@
     <string name="cat_summary_fragment_exit_dialog_title">You\'ve created your cat</string>
     <string name="cat_summary_fragment_exit_dialog_body">Your cat was saved locally</string>
     <string name="cat_summary_fragment_exit_dialog_positive_button">Go to home</string>
+    <string name="cat_profile_step">Cat Profile</string>
+    <string name="cat_picker_step">Cat Picker</string>
+    <string name="cat_summary_step">Cat Summary</string>
+    <string name="empty_string" />
 </resources>
