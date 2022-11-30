@@ -3,12 +3,15 @@ package com.limallucas96.feature_one.entrypoint
 import com.example.analytics.analytics.Analytics
 import com.example.analytics.analytics.Events.FEATURE_ONE_ENTRY_POINT_CREATION_EVENT
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
+import com.limallucas96.core_presentation.resourceprovider.ResourcesProvider
+import com.limallucas96.feature_one.enums.CatProfileProgress
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class FeatureOneEntryPointViewModel @Inject constructor(
-    private val analytics: Analytics
+    private val analytics: Analytics,
+    private val resourcesProvider: ResourcesProvider,
 ) :
     BaseMVIViewModel<FeatureOneEntryPointAction, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffect>() {
 
@@ -25,7 +28,15 @@ class FeatureOneEntryPointViewModel @Inject constructor(
                 )
             }
             is FeatureOneEntryPointAction.UpdateToolbar -> {
-                updateViewState { copy(toolbarProgress = action.step) }
+                updateViewState {
+                    copy(
+                        isProgressBarVisible = action.catProfileProgress.step > 0,
+                        progressBarStep = action.catProfileProgress.step,
+                        progressBarMax = CatProfileProgress.getSumOfSteps(),
+                        isToolbarVisible = action.catProfileProgress != CatProfileProgress.NONE,
+                        toolbarTitle = resourcesProvider.getString(action.catProfileProgress.stringRes)
+                    )
+                }
             }
         }
     }

@@ -25,7 +25,6 @@ class FeatureHomeEntryPointActivity :
 
     override fun onViewStateUpdated(viewState: FeatureHomeEntryPointViewState) {
         // nothing to do here
-        // TODO implement this in base so we dont need to implement her
     }
 
     override fun onSideEffectReceived(sideEffect: FeatureHomeEntryPointSideEffect) {
@@ -38,9 +37,4 @@ class FeatureHomeEntryPointActivity :
             }
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
 }

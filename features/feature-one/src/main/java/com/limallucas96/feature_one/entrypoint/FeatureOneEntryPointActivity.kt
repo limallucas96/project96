@@ -26,11 +26,11 @@ class FeatureOneEntryPointActivity :
     }
 
     override fun onViewStateUpdated(viewState: FeatureOneEntryPointViewState) {
-        binding.progressBar.isVisible = viewState.toolbarProgress.step > 0
-        binding.progressBar.progress = viewState.toolbarProgress.step
-        binding.progressBar.max = viewState.toolbarProgress.getSumOfSteps()
-        binding.toolbarNavigation.isVisible = viewState.toolbarProgress != CatProfileProgress.NONE
-        binding.toolbarNavigation.title = getString(viewState.toolbarProgress.stringRes)
+        binding.progressBar.isVisible = viewState.isProgressBarVisible
+        binding.progressBar.progress = viewState.progressBarStep
+        binding.progressBar.max = viewState.progressBarMax
+        binding.toolbarNavigation.isVisible = viewState.isToolbarVisible
+        binding.toolbarNavigation.title = viewState.toolbarTitle
     }
 
     override fun onSideEffectReceived(sideEffect: FeatureOneEntryPointSideEffect) {

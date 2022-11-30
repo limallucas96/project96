@@ -10,6 +10,6 @@ enum class CatProfileProgress(@StringRes val stringRes: Int, val step: Int) {
     NONE(R.string.empty_string, 0);
 
     companion object {
-        fun CatProfileProgress.getSumOfSteps() = values().size - 1
+        fun getSumOfSteps() = values().size - 1
     }
 }
