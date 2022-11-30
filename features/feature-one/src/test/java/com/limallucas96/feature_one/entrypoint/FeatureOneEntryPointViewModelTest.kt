@@ -45,7 +45,7 @@ class FeatureOneEntryPointViewModelTest :
         CatProfileProgress.values().forEach { type ->
             assertToolbarViewState(
                 type = type,
-                isProgressBarVisible = type.step > 0,
+                isProgressBarVisible = type != CatProfileProgress.NONE,
                 progressBarStep = type.step,
                 progressBarMax = CatProfileProgress.getSumOfSteps(),
                 isToolbarVisible = type != CatProfileProgress.NONE,

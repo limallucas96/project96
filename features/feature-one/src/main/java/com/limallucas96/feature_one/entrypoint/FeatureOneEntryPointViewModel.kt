@@ -30,7 +30,7 @@ class FeatureOneEntryPointViewModel @Inject constructor(
             is FeatureOneEntryPointAction.UpdateToolbar -> {
                 updateViewState {
                     copy(
-                        isProgressBarVisible = action.catProfileProgress.step > 0,
+                        isProgressBarVisible = action.catProfileProgress != CatProfileProgress.NONE,
                         progressBarStep = action.catProfileProgress.step,
                         progressBarMax = CatProfileProgress.getSumOfSteps(),
                         isToolbarVisible = action.catProfileProgress != CatProfileProgress.NONE,
