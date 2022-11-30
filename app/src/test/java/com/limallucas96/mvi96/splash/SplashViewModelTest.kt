@@ -30,4 +30,10 @@ class SplashViewModelTest :
         actions = listOf(SplashAction.OnCreate)
     )
 
+    @Test
+    fun `when OnCreate is dispatched, then assert event is called`()  {
+        viewModel.dispatch(SplashAction.OnCreate)
+        verify(analytics).logFirebaseEvent("SPLASH_CREATION_EVENT")
+    }
+
 }

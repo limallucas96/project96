@@ -1,5 +1,7 @@
 package com.limallucas96.feature_home
 
+import com.example.abtest.Abtest
+import com.limallucas96.core_data.repositories.pet.PetRepository
 import com.limallucas96.core_presentation.resourceprovider.ResourcesProvider
 import com.limallucas96.core_presentation_test.base.BaseMVIViewModelTest
 import com.limallucas96.feature_home.home.HomeFragmentAction
@@ -19,11 +21,17 @@ class HomeFragmentViewModelTest :
     BaseMVIViewModelTest<HomeFragmentAction, HomeFragmentViewState, HomeFragmentSideEffect, HomeFragmentViewModel>() {
 
     @Mock
+    private lateinit var abtest: Abtest
+
+    @Mock
+    private lateinit var petRepository: PetRepository
+
+    @Mock
     private lateinit var resourcesProvider: ResourcesProvider
 
     @Before
     fun setupViewModel() {
-        viewModel = HomeFragmentViewModel(resourcesProvider)
+        viewModel = HomeFragmentViewModel(abtest, petRepository, resourcesProvider)
     }
 
     @Ignore("Check about error Test worker @coroutine#5")
