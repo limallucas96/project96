@@ -2,6 +2,8 @@ package com.limallucas96.feature_home.home
 
 import androidx.lifecycle.viewModelScope
 import com.example.abtest.Abtest
+import com.limallucas96.core_common.TempDefaultDispatcherProvider
+import com.limallucas96.core_common.TempDispatcherProvider
 import com.limallucas96.core_data.repositories.pet.PetRepository
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import com.limallucas96.core_presentation.resourceprovider.ResourcesProvider
@@ -15,7 +17,8 @@ import javax.inject.Inject
 class HomeFragmentViewModel @Inject constructor(
     private val abtest: Abtest,
     private val petRepository: PetRepository,
-    private val resourcesProvider: ResourcesProvider
+    private val resourcesProvider: ResourcesProvider,
+    private val dispatchers: TempDispatcherProvider = TempDefaultDispatcherProvider()
 ) : BaseMVIViewModel<HomeFragmentAction, HomeFragmentViewState, HomeFragmentSideEffect>() {
 
     override fun createInitialViewState() = HomeFragmentViewState()
@@ -33,13 +36,12 @@ class HomeFragmentViewModel @Inject constructor(
     }
 
     private fun fetchPets() {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchers.default()) {
             petRepository.getPets().collectLatest { petResult ->
                 petResult.fold(
                     onSuccess = { pets ->
-                        val petCounter = resourcesProvider.getString(R.string.pet_counter, pets.size)
-                        val lastPet =
-                            resourcesProvider.getString(R.string.last_pet_created, pets.lastOrNull()?.name.orEmpty())
+                        val petCounter = resourcesProvider.getString(R.string.pet_counter, pets.size.toString())
+                        val lastPet = resourcesProvider.getString(R.string.last_pet_created, pets.lastOrNull()?.name.orEmpty())
                         updateViewState {
                             copy(
                                 petCounter = petCounter,
