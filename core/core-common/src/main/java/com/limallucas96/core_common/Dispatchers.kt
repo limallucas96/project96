@@ -8,25 +8,12 @@ interface AppDispatcherProvider {
     val main: CoroutineDispatcher
     val io: CoroutineDispatcher
     val default: CoroutineDispatcher
+    val unconfined: CoroutineDispatcher
 }
 
 class AppDispatchers @Inject constructor() : AppDispatcherProvider {
-
-    override val main: CoroutineDispatcher
-        get() = Dispatchers.Main
-
-    override val io: CoroutineDispatcher
-        get() = Dispatchers.IO
-
-    override val default: CoroutineDispatcher
-        get() = Dispatchers.Default
+    override val main = Dispatchers.Main
+    override val io = Dispatchers.IO
+    override val default = Dispatchers.Default
+    override val unconfined = Dispatchers.Unconfined
 }
-
-interface TempDispatcherProvider {
-    fun main(): CoroutineDispatcher = Dispatchers.Main
-    fun default(): CoroutineDispatcher = Dispatchers.Default
-    fun io(): CoroutineDispatcher = Dispatchers.IO
-    fun unconfined(): CoroutineDispatcher = Dispatchers.Unconfined
-}
-
-class TempDefaultDispatcherProvider : TempDispatcherProvider

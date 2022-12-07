@@ -7,23 +7,23 @@ import com.limallucas96.feature_one.catpicker.CatPickerAction
 import com.limallucas96.feature_one.catpicker.CatPickerSideEffect
 import com.limallucas96.feature_one.catpicker.CatPickerViewModel
 import com.limallucas96.feature_one.catpicker.CatPickerViewState
-import com.limallucas96.core_presentation_test.dispatchers.TestDispatchers
+import com.limallucas96.feature_one.testrule.CoroutineTestRule
+import io.mockk.coEvery
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit4.MockKRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
-import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class CatPickerViewModelTest :
     BaseMVIViewModelTest<CatPickerAction, CatPickerViewState, CatPickerSideEffect, CatPickerViewModel>() {
 
-    private val mockCatPickerViewState = CatPickerViewState(
+    private val testViewState = CatPickerViewState(
         isLoading = false,
         isError = false,
         catName = "",
@@ -31,61 +31,100 @@ class CatPickerViewModelTest :
         catUrlPhoto = ""
     )
 
-    @Mock
-    private lateinit var mockCatRepository: CatRepository
+    @MockK
+    private lateinit var catRepository: CatRepository
+
+    @get:Rule
+    var coroutinesTestRule = CoroutineTestRule()
+
+    @get:Rule
+    val mockkRule = MockKRule(this)
 
     @Before
     fun setupViewModel() {
-        viewModel = CatPickerViewModel(TestDispatchers(), mockCatRepository)
+        viewModel = CatPickerViewModel(
+            coroutinesTestRule.testDispatcherProvider,
+            catRepository
+        )
     }
 
     @Test
-    fun `Given a success api call, when ViewScreen, ButtonShortNewCat or Retry are dispatched, then assert view is loading`() =
-        assertViewState(
-            expectedViewState = mockCatPickerViewState.copy(isLoading = true),
-            actions = listOf(CatPickerAction.OnCreate("", "")),
-            initializeMocks = {
-                mockSuccessGetCatsApiCall()
-            }
+    fun `Given a success api call to get cats, when ButtonShortNewCat or Retry are dispatched, then assert view state is loading`() {
+        tempAssertViewState(
+            dispatcher = coroutinesTestRule.testDispatcherProvider,
+            expectedViewState = testViewState.copy(isLoading = true),
+            actions = listOf(CatPickerAction.ButtonShortNewCat),
+            initializeMocks = { coEvery { catRepository.getCats() } returns Result.success(listOf()) },
+            emissionCount = 1
         )
+    }
 
     @Test
-    fun `Given a success api call, when ViewScreen, ButtonShortNewCat or Retry are dispatched, then assert view url`() =
-        assertViewState(
-            expectedViewState = mockCatPickerViewState.copy(
-                isLoading = false,
-                catUrlPhoto = "https",
-            ),
-            actions = listOf(CatPickerAction.OnCreate("", "")),
-            initializeMocks = {
-                mockSuccessGetCatsApiCall()
-            },
+    fun `Given a success api call to get cats, when ButtonShortNewCat or Retry are dispatched, then assert view state is not loading and has a cat url`() {
+        tempAssertViewState(
+            dispatcher = coroutinesTestRule.testDispatcherProvider,
+            expectedViewState = testViewState.copy(catUrlPhoto = "url"),
+            actions = listOf(CatPickerAction.ButtonShortNewCat),
+            initializeMocks = { coEvery { catRepository.getCats() } returns Result.success(listOf(Cat(name = "name", description = "description", url = "url"))) },
             emissionCount = 2
         )
+    }
 
-    @Ignore("Ignoring this unit test until we find out why the test is not passing")
     @Test
-    fun `Given a success api call, when ViewScreen, ButtonShortNewCat or Retry are dispatched, then assert error`() =
-        assertViewState(
-            expectedViewState = mockCatPickerViewState.copy(
-                isLoading = false,
-                isError = true,
-            ),
-            actions = listOf(CatPickerAction.OnCreate("", "")),
-            initializeMocks = {
-                mockErrorGetCatsApiCall()
-            },
+    fun `Given a failure api call to get cats, when ButtonShortNewCat or Retry are dispatched, then assert view state is error set to true`() {
+        tempAssertViewState(
+            dispatcher = coroutinesTestRule.testDispatcherProvider,
+            expectedViewState = testViewState.copy(isError = true),
+            actions = listOf(CatPickerAction.ButtonShortNewCat),
+            initializeMocks = { coEvery { catRepository.getCats() }  returns Result.failure(Exception()) },
             emissionCount = 2
         )
-
-    private suspend fun mockSuccessGetCatsApiCall() {
-        whenever(mockCatRepository.getCats()).then { Result.success(listOf(Cat("cat", "description", "https"))) }
-//        `when`(mockCatRepository.getCats()).thenReturn(Result.success(listOf(Cat("cat", "description", "https"))))
     }
 
-    private suspend fun mockErrorGetCatsApiCall() {
-        kotlin.runCatching {
-            whenever(mockCatRepository.getCats()).thenReturn(Result.failure(Exception()))
-        }
+    @Test
+    fun `Given a success api call to get cats, when OnCreate is dispatched, then assert view state is loading set to true`() {
+        tempAssertViewState(
+            dispatcher = coroutinesTestRule.testDispatcherProvider,
+            expectedViewState = testViewState.copy(isLoading = true, catName = "name", catAge = "123"),
+            actions = listOf(CatPickerAction.OnCreate(catName = "name", catAge = "123")),
+            initializeMocks = { coEvery { catRepository.getCats() } returns Result.success(listOf(Cat(name = "name", description = "description", url = "url"))) },
+            emissionCount = 1
+        )
     }
+
+    @Test
+    fun `Given a success api call to get cats, when OnCreate is dispatched, then assert view state have all expected values`() {
+        tempAssertViewState(
+            dispatcher = coroutinesTestRule.testDispatcherProvider,
+            expectedViewState = testViewState.copy(catName = "name", catAge = "123", catUrlPhoto = "url"),
+            actions = listOf(CatPickerAction.OnCreate(catName = "name", catAge = "123")),
+            initializeMocks = { coEvery { catRepository.getCats() } returns Result.success(listOf(Cat(name = "name", description = "description", url = "url"))) },
+            emissionCount = 2
+        )
+    }
+
+    @Test
+    fun `Given a failure api call to get cats, when OnCreate is dispatched, then assert view state have all expected values`() {
+        tempAssertViewState(
+            dispatcher = coroutinesTestRule.testDispatcherProvider,
+            expectedViewState = testViewState.copy(isError = true, catName = "name", catAge = "123"),
+            actions = listOf(CatPickerAction.OnCreate(catName = "name", catAge = "123")),
+            initializeMocks = { coEvery { catRepository.getCats() }  returns Result.failure(Exception()) },
+            emissionCount = 2
+        )
+    }
+
+    @Test
+    fun `When ButtonChooseCatClick is dispatched, then assert NavigateToCatSummary is emitted`() {
+        assertSideEffect(
+            dispatcher = coroutinesTestRule.testDispatcherProvider,
+            expectedSideEffect = CatPickerSideEffect.NavigateToCatSummary("name", "123", "temp" , true),
+            actions = listOf(
+                CatPickerAction.OnCreate(catName = "name", catAge = "123"),
+                CatPickerAction.ButtonChooseCatClick
+            ),
+            initializeMocks = { coEvery { catRepository.getCats() } returns Result.success(listOf(Cat(name = "name", description = "description", url = "url"))) }
+        )
+    }
+
 }

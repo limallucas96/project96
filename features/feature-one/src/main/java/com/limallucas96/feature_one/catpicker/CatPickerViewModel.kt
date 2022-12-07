@@ -5,9 +5,7 @@ import com.limallucas96.core_common.AppDispatcherProvider
 import com.limallucas96.core_data.repositories.cat.CatRepository
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
 
 @HiltViewModel

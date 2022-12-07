@@ -2,6 +2,7 @@ package com.limallucas96.feature_one.entrypoint
 
 import com.example.analytics.analytics.Analytics
 import com.example.analytics.analytics.Events.FEATURE_ONE_ENTRY_POINT_CREATION_EVENT
+import com.limallucas96.core_common.AppDispatcherProvider
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import com.limallucas96.core_presentation.resourceprovider.ResourcesProvider
 import com.limallucas96.feature_one.enums.CatProfileProgress
@@ -12,6 +13,7 @@ import javax.inject.Inject
 class FeatureOneEntryPointViewModel @Inject constructor(
     private val analytics: Analytics,
     private val resourcesProvider: ResourcesProvider,
+    private val dispatcher: AppDispatcherProvider
 ) :
     BaseMVIViewModel<FeatureOneEntryPointAction, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffect>() {
 

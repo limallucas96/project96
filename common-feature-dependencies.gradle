@@ -24,6 +24,10 @@ dependencies {
     testImplementation rootProject.libraries.mockitoKotlin
     testImplementation rootProject.libraries.mockitoInline
 
+    implementation rootProject.libraries.stdlibJdk7
+    implementation rootProject.libraries.stdlib
+    implementation rootProject.libraries.reflection
+
     androidTestImplementation rootProject.libraries.androidXJunit
     androidTestImplementation rootProject.libraries.androidXEspresso
 }

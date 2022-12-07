@@ -1,6 +1,7 @@
 package com.limallucas96.feature_one.catsummary
 
 import androidx.lifecycle.viewModelScope
+import com.limallucas96.core_common.AppDispatcherProvider
 import com.limallucas96.core_common.AppDispatchers
 import com.limallucas96.core_data.repositories.pet.PetRepository
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CatSummaryViewModel @Inject constructor(
-    private val appDispatchers: AppDispatchers,
+    private val dispatcher: AppDispatcherProvider,
     private val resourcesProvider: ResourcesProvider,
     private val petRepository: PetRepository
 ) : BaseMVIViewModel<CatSummaryAction, CatSummaryViewState, CatSummarySideEffect>() {
@@ -51,7 +52,7 @@ class CatSummaryViewModel @Inject constructor(
     }
 
     private fun insertNewPet(currentState: CatSummaryViewState) {
-        viewModelScope.launch(appDispatchers.default) {
+        viewModelScope.launch(dispatcher.default) {
             petRepository.insertPet(
                 petName = currentState.catName,
                 petAge = currentState.catAge.toIntOrNull() ?: 0,

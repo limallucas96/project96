@@ -33,6 +33,8 @@ ext.versions = [
         gsonConverter           : '2.9.0',
 
         room                    : '2.4.3',
+
+        kotlinCore              : '1.7.10',
 ]
 
 ext.libraries = [
@@ -74,7 +76,11 @@ ext.libraries = [
         roomRuntime             : "androidx.room:room-runtime:$versions.room",
         roomKtx                 : "androidx.room:room-ktx:$versions.room",
         roomKapt                : "androidx.room:room-compiler:$versions.room",
-        roomTest                : "androidx.room:room-testing:$versions.room", // room migration testing
+        roomTest                : "androidx.room:room-testing:$versions.room", // room migration testing,
+
+        stdlibJdk7              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinCore",
+        stdlib                  : "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinCore",
+        reflection              : "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlinCore",
 
 ]
 

@@ -2,8 +2,7 @@ package com.limallucas96.feature_home.home
 
 import androidx.lifecycle.viewModelScope
 import com.example.abtest.Abtest
-import com.limallucas96.core_common.TempDefaultDispatcherProvider
-import com.limallucas96.core_common.TempDispatcherProvider
+import com.limallucas96.core_common.AppDispatcherProvider
 import com.limallucas96.core_data.repositories.pet.PetRepository
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import com.limallucas96.core_presentation.resourceprovider.ResourcesProvider
@@ -18,7 +17,7 @@ class HomeFragmentViewModel @Inject constructor(
     private val abtest: Abtest,
     private val petRepository: PetRepository,
     private val resourcesProvider: ResourcesProvider,
-    private val dispatchers: TempDispatcherProvider = TempDefaultDispatcherProvider()
+    private val dispatcher: AppDispatcherProvider
 ) : BaseMVIViewModel<HomeFragmentAction, HomeFragmentViewState, HomeFragmentSideEffect>() {
 
     override fun createInitialViewState() = HomeFragmentViewState()
@@ -36,7 +35,7 @@ class HomeFragmentViewModel @Inject constructor(
     }
 
     private fun fetchPets() {
-        viewModelScope.launch(dispatchers.default()) {
+        viewModelScope.launch(dispatcher.default) {
             petRepository.getPets().collectLatest { petResult ->
                 petResult.fold(
                     onSuccess = { pets ->

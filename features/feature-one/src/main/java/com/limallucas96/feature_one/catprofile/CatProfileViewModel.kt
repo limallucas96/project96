@@ -1,8 +1,14 @@
 package com.limallucas96.feature_one.catprofile
 
+import com.limallucas96.core_common.AppDispatcherProvider
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CatProfileViewModel :
+@HiltViewModel
+class CatProfileViewModel @Inject constructor(
+    private val dispatcher: AppDispatcherProvider
+) :
     BaseMVIViewModel<CatProfileAction, CatProfileViewState, CatProfileSideEffect>() {
 
     override fun createInitialViewState() = CatProfileViewState()
