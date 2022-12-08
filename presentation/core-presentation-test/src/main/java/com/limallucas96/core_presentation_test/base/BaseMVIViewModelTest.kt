@@ -1,6 +1,5 @@
 package com.limallucas96.core_presentation_test.base
 
-import app.cash.turbine.test
 import com.limallucas96.core_common.AppDispatcherProvider
 import com.limallucas96.core_presentation.mvi.BaseMVIViewModel
 import com.limallucas96.core_presentation.mvi.SideEffect
@@ -10,7 +9,6 @@ import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 
 @OptIn(ExperimentalCoroutinesApi::class)

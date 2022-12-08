@@ -29,8 +29,8 @@ class SplashViewModelTest :
     @Before
     fun setupViewModel() {
         viewModel = SplashViewModel(
-            analytics,
-            coroutinesTestRule.testDispatcherProvider
+            coroutinesTestRule.testDispatcherProvider,
+            analytics
         )
     }
 

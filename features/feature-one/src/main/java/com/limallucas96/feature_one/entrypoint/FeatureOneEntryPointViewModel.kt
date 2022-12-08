@@ -11,9 +11,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FeatureOneEntryPointViewModel @Inject constructor(
+    private val dispatcher: AppDispatcherProvider,
     private val analytics: Analytics,
-    private val resourcesProvider: ResourcesProvider,
-    private val dispatcher: AppDispatcherProvider
+    private val resourcesProvider: ResourcesProvider
 ) :
     BaseMVIViewModel<FeatureOneEntryPointAction, FeatureOneEntryPointViewState, FeatureOneEntryPointSideEffect>() {
 

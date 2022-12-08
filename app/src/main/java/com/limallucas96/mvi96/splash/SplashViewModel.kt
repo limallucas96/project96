@@ -12,8 +12,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val analytics: Analytics,
-    private val dispatcher: AppDispatcherProvider
+    private val dispatcher: AppDispatcherProvider,
+    private val analytics: Analytics
 ) : BaseMVIViewModel<SplashAction, SplashViewState, SplashSideEffect>() {
 
     override fun createInitialViewState() = SplashViewState()
@@ -22,15 +22,8 @@ class SplashViewModel @Inject constructor(
         when (action) {
             SplashAction.OnCreate -> {
                 analytics.logFirebaseEvent(SPLASH_CREATION_EVENT)
-                navigateToHome()
+                emitSideEffect(SplashSideEffect.NavigateToHome)
             }
-        }
-    }
-
-    private fun navigateToHome() {
-        viewModelScope.launch {
-            delay(5000L) // fake a delay of 5 seconds in splash screen before emit navigate side effect
-            emitSideEffect(SplashSideEffect.NavigateToHome)
         }
     }
 
