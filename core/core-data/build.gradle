@@ -1,4 +1,5 @@
 apply from: "$rootDir/common-android-library.gradle"
+apply from: "$rootDir/common-unit-test-dependencies.gradle"
 apply plugin: 'dagger.hilt.android.plugin'
 
 dependencies {
@@ -17,12 +18,5 @@ dependencies {
 
     implementation rootProject.libraries.gson
     implementation rootProject.libraries.androidXCoreKtx
-    implementation rootProject.libraries.coroutinesCore // dispatcher
-
-    androidTestImplementation rootProject.libraries.androidXJunit
-    androidTestImplementation rootProject.libraries.androidXEspresso
-
-    testImplementation rootProject.libraries.junit
-    testImplementation rootProject.libraries.coroutinesTest
-    testImplementation rootProject.libraries.mockitoInline
+    implementation rootProject.libraries.coroutinesCore
 }

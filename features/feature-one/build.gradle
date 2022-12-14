@@ -1,20 +1,11 @@
 apply from: "$rootDir/common-android-library.gradle"
 apply from: "$rootDir/common-feature-modules.gradle"
 apply from: "$rootDir/common-feature-dependencies.gradle"
+apply from: "$rootDir/common-unit-test-dependencies.gradle"
 apply plugin: 'dagger.hilt.android.plugin'
 
 dependencies {
     /** Add any particular dependency for this module here **/
-
-    testImplementation "io.mockk:mockk:1.13.3"
-
-    testImplementation "io.mockk:mockk-android:1.13.3"
-    testImplementation "io.mockk:mockk-agent:1.13.3"
-
-    androidTestImplementation "io.mockk:mockk-android:1.13.3"
-    androidTestImplementation "io.mockk:mockk-agent:1.13.3"
-
-
 
     implementation project(path: ':libraries:analytics')
 

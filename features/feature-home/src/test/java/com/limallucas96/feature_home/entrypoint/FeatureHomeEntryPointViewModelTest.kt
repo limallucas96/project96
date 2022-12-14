@@ -3,21 +3,20 @@ package com.limallucas96.feature_home.entrypoint
 import com.example.analytics.analytics.Analytics
 import com.limallucas96.core_presentation_test.base.BaseMVIViewModelTest
 import com.limallucas96.feature_home.testrule.CoroutineTestRule
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.verify
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@RunWith(MockitoJUnitRunner::class)
 class FeatureHomeEntryPointViewModelTest :
     BaseMVIViewModelTest<FeatureHomeEntryPointAction, FeatureHomeEntryPointViewState, FeatureHomeEntryPointSideEffect, FeatureHomeEntryPointViewModel>() {
 
-    @Mock
+    @MockK
     private lateinit var analytics: Analytics
 
     @get:Rule
@@ -25,6 +24,7 @@ class FeatureHomeEntryPointViewModelTest :
 
     @Before
     fun setupViewModel() {
+        MockKAnnotations.init(this)
         viewModel = FeatureHomeEntryPointViewModel(
             analytics,
             coroutinesTestRule.testDispatcherProvider
@@ -33,15 +33,18 @@ class FeatureHomeEntryPointViewModelTest :
 
     @Test
     fun `when OnCreate is dispatched, then assert navigate to home fragment is emitted`() = assertSideEffect(
+        dispatcher = coroutinesTestRule.testDispatcherProvider,
         expectedSideEffect = FeatureHomeEntryPointSideEffect.NavigateToHomeFragment,
-        actions = listOf(FeatureHomeEntryPointAction.OnCreate)
+        actions = listOf(FeatureHomeEntryPointAction.OnCreate),
+        initializeMocks = {
+            every { analytics.logFirebaseEvent("FEATURE_HOME_ENTRY_POINT_CREATION_EVENT") } returns Unit
+        }
     )
 
     @Test
     fun `when OnCreate is dispatched, then assert that event is called`() {
         viewModel.dispatch(FeatureHomeEntryPointAction.OnCreate)
-        verify(analytics).logFirebaseEvent("FEATURE_HOME_ENTRY_POINT_CREATION_EVENT")
+        verify { analytics.logFirebaseEvent("FEATURE_HOME_ENTRY_POINT_CREATION_EVENT") }
     }
-
 
 }

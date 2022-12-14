@@ -35,11 +35,14 @@ abstract class BaseMVIViewModelTest<
         val job = launch(dispatcher.default) { viewModel.sideEffect.toList(sideEffects) }
 
         // Dispatch actions
-        actions.forEach { userAction -> viewModel.dispatch(userAction) }
+        actions.forEach { userAction ->
+            viewModel.dispatch(userAction)
+        }
 
-        // Asserts right side effect was emitted when the action was dispatched
+        // Asserts side effect at specific index with the expected given side effect
         assertEquals(sideEffects.getOrNull(emissionCount), expectedSideEffect)
 
+        // Cancels job
         job.cancel()
         mocks.cancel()
     }
@@ -61,7 +64,7 @@ abstract class BaseMVIViewModelTest<
         // Dispatch actions
         actions.forEach { userAction -> viewModel.dispatch(userAction) }
 
-        // Asserts view state at specific index with the expected view state
+        // Asserts view state at specific index with the expected given view state
         assertEquals(viewStateList.getOrNull(emissionCount), expectedViewState)
 
         // Cancels job

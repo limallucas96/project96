@@ -1,0 +1,13 @@
+dependencies {
+
+    /** Shared implementations that are used in all features including app. **/
+
+    testImplementation rootProject.libraries.coroutinesTest
+
+    testImplementation rootProject.libraries.mockk
+    testImplementation rootProject.libraries.mockkAndroid
+    testImplementation rootProject.libraries.mockkAgent
+
+    testImplementation rootProject.libraries.junit
+    testImplementation rootProject.libraries.mockitoKotlin
+}

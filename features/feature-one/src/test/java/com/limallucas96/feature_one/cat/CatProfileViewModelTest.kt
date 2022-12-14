@@ -15,7 +15,6 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
-@RunWith(MockitoJUnitRunner::class)
 class CatProfileViewModelTest :
     BaseMVIViewModelTest<CatProfileAction, CatProfileViewState, CatProfileSideEffect, CatProfileViewModel>() {
 

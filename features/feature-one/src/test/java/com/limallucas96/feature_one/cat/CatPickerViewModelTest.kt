@@ -19,7 +19,6 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
-@RunWith(MockitoJUnitRunner::class)
 class CatPickerViewModelTest :
     BaseMVIViewModelTest<CatPickerAction, CatPickerViewState, CatPickerSideEffect, CatPickerViewModel>() {
 
@@ -118,7 +117,7 @@ class CatPickerViewModelTest :
     fun `When ButtonChooseCatClick is dispatched, then assert NavigateToCatSummary is emitted`() {
         assertSideEffect(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
-            expectedSideEffect = CatPickerSideEffect.NavigateToCatSummary("name", "123", "temp" , true),
+            expectedSideEffect = CatPickerSideEffect.NavigateToCatSummary("name", "123", "url" , true),
             actions = listOf(
                 CatPickerAction.OnCreate(catName = "name", catAge = "123"),
                 CatPickerAction.ButtonChooseCatClick

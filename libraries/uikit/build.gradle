@@ -10,6 +10,6 @@ dependencies {
     testImplementation rootProject.libraries.junit
 
     implementation  rootProject.libraries.glide
-    annotationProcessor  rootProject.libraries.glideAnnotationProcessor
+    kapt  rootProject.libraries.glideAnnotationProcessor
 
 }

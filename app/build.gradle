@@ -50,4 +50,5 @@ dependencies {
 }
 
 apply from: "$rootDir/common-feature-modules.gradle"
+apply from: "$rootDir/common-unit-test-dependencies.gradle"
 apply from: "$rootDir/common-feature-dependencies.gradle"

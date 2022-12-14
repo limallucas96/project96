@@ -14,14 +14,12 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.junit4.MockKRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
-@RunWith(MockitoJUnitRunner::class)
 class CatSummaryViewModelTest :
     BaseMVIViewModelTest<CatSummaryAction, CatSummaryViewState, CatSummarySideEffect, CatSummaryViewModel>() {
 
@@ -31,10 +29,10 @@ class CatSummaryViewModelTest :
         catPhotoUrl = ""
     )
 
-    @MockK(relaxUnitFun = true, relaxed = true)
+    @MockK
     private lateinit var petRepository: PetRepository
 
-    @RelaxedMockK
+    @MockK
     private lateinit var resourcesProvider: ResourcesProvider
 
     @get:Rule
@@ -45,7 +43,7 @@ class CatSummaryViewModelTest :
 
     @Before
     fun setupViewModel() {
-        MockKAnnotations.init(this, relaxUnitFun = true)
+        MockKAnnotations.init(this)
         viewModel = CatSummaryViewModel(
             coroutinesTestRule.testDispatcherProvider,
             resourcesProvider,
@@ -94,18 +92,23 @@ class CatSummaryViewModelTest :
         )
     }
 
+    // TODO this unit test passes even if mockInsertPets is not given
     @Test
     fun `Given a success init of the view model, when ButtonSaveLocallyClick is dispatched, then assert ShowExitConfirmationDialog is emitted`() {
         assertSideEffect(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedSideEffect = CatSummarySideEffect.ShowExitConfirmationDialog,
             actions = listOf(
-                CatSummaryAction.OnCreate(catName = "My cat name: name", catAge = "My cat age: 123", catPhotoUrl = "url"),
+                CatSummaryAction.OnCreate(
+                    catName = "name",
+                    catAge = "123",
+                    catPhotoUrl = "url"
+                ),
                 CatSummaryAction.ButtonSaveLocallyClick
             ),
             initializeMocks = {
+                mockInsertPets() // TODO this unit test passes even if mockInsertPets is not given
                 mockResourceProvider()
-                mockInsertPets()
             }
         )
     }
@@ -116,7 +119,7 @@ class CatSummaryViewModelTest :
     }
 
     private fun mockInsertPets() {
-        coVerify { petRepository.insertPet("My cat name: name", 0, "url") }
+        coEvery { petRepository.insertPet("My cat name: name",  0, "url") } returns Unit
     }
 
 }

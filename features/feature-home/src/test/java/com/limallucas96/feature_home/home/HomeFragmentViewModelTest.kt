@@ -7,28 +7,27 @@ import com.limallucas96.core_presentation_test.base.BaseMVIViewModelTest
 import com.limallucas96.domain_model.models.Cat
 import com.limallucas96.feature_home.R
 import com.limallucas96.feature_home.testrule.CoroutineTestRule
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.junit.MockitoJUnitRunner
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@RunWith(MockitoJUnitRunner::class)
 class HomeFragmentViewModelTest :
     BaseMVIViewModelTest<HomeFragmentAction, HomeFragmentViewState, HomeFragmentSideEffect, HomeFragmentViewModel>() {
 
-    @Mock
+    @MockK
     private lateinit var abtest: Abtest
 
-    @Mock
+    @MockK
     private lateinit var petRepository: PetRepository
 
-    @Mock
+    @MockK
     private lateinit var resourcesProvider: ResourcesProvider
 
     @get:Rule
@@ -36,6 +35,7 @@ class HomeFragmentViewModelTest :
 
     @Before
     fun setupViewModel() {
+        MockKAnnotations.init(this)
         viewModel = HomeFragmentViewModel(
             abtest,
             petRepository,
@@ -105,33 +105,21 @@ class HomeFragmentViewModelTest :
         )
 
     private fun mockStrings() {
-        `when`(resourcesProvider.getString(R.string.pet_counter, "1")).thenReturn("pet counter: 1")
-        `when`(resourcesProvider.getString(R.string.last_pet_created, "pet")).thenReturn("Last pet created: pet")
-        `when`(resourcesProvider.getString(R.string.pet_counter_error)).thenReturn("We could not retrieve any pet from our database")
+        every { resourcesProvider.getString(R.string.pet_counter, "1") } returns "pet counter: 1"
+        every { resourcesProvider.getString(R.string.last_pet_created, "pet") } returns "Last pet created: pet"
+        every { resourcesProvider.getString(R.string.pet_counter_error) } returns "We could not retrieve any pet from our database"
     }
 
     private fun mockAbtest(value: Boolean) {
-        `when`(abtest.showLastPet()).thenReturn(value)
+        every { abtest.showLastPet() } returns value
     }
 
     private suspend fun mockSuccessfulCallOfGetPets() {
-        `when`(petRepository.getPets()).thenReturn(
-            flowOf(
-                Result.success(
-                    listOf(
-                        Cat(
-                            name = "pet",
-                            description = "",
-                            url = ""
-                        )
-                    )
-                )
-            )
-        )
+        coEvery { petRepository.getPets() } returns flowOf(Result.success(listOf(Cat(name = "pet", description = "", url = ""))))
     }
 
     private suspend fun mockFailureCallOfGetPets() {
-        `when`(petRepository.getPets()).thenReturn(flowOf(Result.failure(Exception())))
+        coEvery {  petRepository.getPets() } returns flowOf(Result.failure(Exception()))
     }
 
 }

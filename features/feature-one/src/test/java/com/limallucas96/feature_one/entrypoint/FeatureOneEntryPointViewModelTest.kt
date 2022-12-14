@@ -6,6 +6,7 @@ import com.limallucas96.core_presentation_test.base.BaseMVIViewModelTest
 import com.limallucas96.feature_one.R
 import com.limallucas96.feature_one.enums.CatProfileProgress
 import com.limallucas96.feature_one.testrule.CoroutineTestRule
+import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
@@ -34,6 +35,7 @@ class FeatureOneEntryPointViewModelTest :
 
     @Before
     fun setupViewModel() {
+        MockKAnnotations.init(this, relaxUnitFun = true)
         viewModel = FeatureOneEntryPointViewModel(
             coroutinesTestRule.testDispatcherProvider,
             analytics,
@@ -47,13 +49,16 @@ class FeatureOneEntryPointViewModelTest :
         expectedSideEffect = FeatureOneEntryPointSideEffect.NavigateToCatProfileFragment(
             "FEATURE_ONE_ACTIVITY_BACK_STACK"
         ),
-        actions = listOf(FeatureOneEntryPointAction.OnCreate)
+        actions = listOf(FeatureOneEntryPointAction.OnCreate),
+        initializeMocks = {
+            every { analytics.logFirebaseEvent("FEATURE_ONE_ENTRY_POINT_CREATION_EVENT") } returns Unit
+        }
     )
 
     @Test
     fun `when OnCreate is dispatched, then assert event is called`() {
         viewModel.dispatch(FeatureOneEntryPointAction.OnCreate)
-        verify { analytics.logFirebaseEvent("FEATURE_ONE_ENTRY_POINT_CREATION_EVENT") }
+        verify(exactly = 1) { analytics.logFirebaseEvent("FEATURE_ONE_ENTRY_POINT_CREATION_EVENT") }
     }
 
     @Test

@@ -35,6 +35,8 @@ ext.versions = [
         room                    : '2.4.3',
 
         kotlinCore              : '1.7.10',
+
+        mockk                   : '1.13.3',
 ]
 
 ext.libraries = [
@@ -81,6 +83,10 @@ ext.libraries = [
         stdlibJdk7              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinCore",
         stdlib                  : "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinCore",
         reflection              : "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlinCore",
+
+        mockk                   : "io.mockk:mockk:$versions.mockk",
+        mockkAndroid            : "io.mockk:mockk-android:$versions.mockk",
+        mockkAgent              : "io.mockk:mockk-agent:$versions.mockk",
 
 ]
 
