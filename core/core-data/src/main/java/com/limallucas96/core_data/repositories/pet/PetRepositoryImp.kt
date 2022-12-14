@@ -1,22 +1,23 @@
 package com.limallucas96.core_data.repositories.pet
 
-import com.limallucas96.core_common.AppDispatchers
+import com.limallucas96.core_common.AppDispatcherProvider
 import com.limallucas96.core_common.runFlowableSafeCall
-import com.limallucas96.core_common.runSafeCall
+import com.limallucas96.core_common.runSuspendableSafeCall
 import com.limallucas96.core_data.mappers.CatMapper.toCat
 import com.limallucas96.core_database.datasource.PetDataSource
 import com.limallucas96.core_database.entities.PetEntity
 import com.limallucas96.domain_model.models.Cat
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class PetRepositoryImp @Inject constructor(
-    private val dispatchers: AppDispatchers,
+    private val dispatchers: AppDispatcherProvider,
     private val petDataSource: PetDataSource
 ) : PetRepository {
 
     override suspend fun insertPet(petName: String, petAge: Int, petPhotoUrl: String) {
-        runSafeCall(dispatchers.io) {
+        runSuspendableSafeCall(dispatchers.io) {
             petDataSource.insertPet(
                 PetEntity(
                     petName = petName,

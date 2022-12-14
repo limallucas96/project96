@@ -5,7 +5,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 
-suspend fun <T> runSafeCall(dispatcher: CoroutineDispatcher, func: suspend () -> T): Result<T> =
+fun <T> runSafeCall(func: () -> T): Result<T> =
+    runCatching {
+        func()
+    }.onSuccess {
+        Result.success(it)
+    }.onFailure {
+        Result.failure<Throwable>(it)
+    }
+
+suspend fun <T> runSuspendableSafeCall(dispatcher: CoroutineDispatcher, func: suspend () -> T): Result<T> =
     withContext(dispatcher) {
         runCatching {
             func()
@@ -16,9 +25,9 @@ suspend fun <T> runSafeCall(dispatcher: CoroutineDispatcher, func: suspend () ->
         }
     }
 
-suspend fun <T> runFlowableSafeCall(
+fun <T> runFlowableSafeCall(
     dispatcher: CoroutineDispatcher,
-    func:  suspend () -> Flow<T>
+    func: () -> Flow<T>
 ): Flow<Result<T>> {
     return func().map {
         Result.success(it)
