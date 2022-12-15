@@ -11,10 +11,8 @@ import com.limallucas96.feature_one.catsummary.CatSummaryViewState
 import com.limallucas96.feature_one.testrule.CoroutineTestRule
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
-import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.junit4.MockKRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -53,7 +51,7 @@ class CatSummaryViewModelTest :
 
     @Test
     fun `Given cat name, cat age and cat url, when OnCreate is dispatched, then assert view state correct value`() {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = mockCatSummaryViewState.copy(
                 catName = "My cat name: name",

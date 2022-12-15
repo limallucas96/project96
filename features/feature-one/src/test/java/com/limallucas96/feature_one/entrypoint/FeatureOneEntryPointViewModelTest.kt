@@ -81,7 +81,7 @@ class FeatureOneEntryPointViewModelTest :
         progressBarMax: Int,
         isToolbarVisible: Boolean
     ) {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = FeatureOneEntryPointViewState(
                 isProgressBarVisible = isProgressBarVisible,

@@ -32,7 +32,9 @@ abstract class BaseMVIViewModelTest<
         val mocks = launch(dispatcher.default) { initializeMocks() }
 
         val sideEffects = mutableListOf<UISideEffect>()
-        val job = launch(dispatcher.default) { viewModel.sideEffect.toList(sideEffects) }
+        val job = launch(dispatcher.default) {
+            viewModel.sideEffect.toList(sideEffects)
+        }
 
         // Dispatch actions
         actions.forEach { userAction ->
@@ -47,7 +49,7 @@ abstract class BaseMVIViewModelTest<
         mocks.cancel()
     }
 
-    fun tempAssertViewState(
+    fun assertViewState(
         dispatcher: AppDispatcherProvider,
         expectedViewState: UIViewState,
         actions: List<UserAction>,
@@ -59,10 +61,14 @@ abstract class BaseMVIViewModelTest<
         val mocks = launch(dispatcher.default) { initializeMocks() }
 
         val viewStateList = mutableListOf<ViewState>()
-        val job = launch(dispatcher.default) { viewModel.viewState.toList(viewStateList) }
+        val job = launch(dispatcher.default) {
+            viewModel.viewState.toList(viewStateList)
+        }
 
         // Dispatch actions
-        actions.forEach { userAction -> viewModel.dispatch(userAction) }
+        actions.forEach { userAction ->
+            viewModel.dispatch(userAction)
+        }
 
         // Asserts view state at specific index with the expected given view state
         assertEquals(viewStateList.getOrNull(emissionCount), expectedViewState)

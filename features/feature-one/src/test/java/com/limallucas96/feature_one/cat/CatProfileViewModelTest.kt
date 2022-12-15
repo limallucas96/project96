@@ -11,8 +11,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
 class CatProfileViewModelTest :
@@ -37,7 +35,7 @@ class CatProfileViewModelTest :
 
     @Test
     fun `Given only the cat name, when OnCatNameChanged is dispatched, then assert that isContinueButtonEnable is false`() =
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = mockCatProfileViewState.copy(
                 catName = "Cat",
@@ -49,7 +47,7 @@ class CatProfileViewModelTest :
 
     @Test
     fun `Given only the cat age, when OnCatAgeChanged is dispatched, then assert that isContinueButtonEnable is false`() =
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = mockCatProfileViewState.copy(
                 catName = "",
@@ -61,7 +59,7 @@ class CatProfileViewModelTest :
 
     @Test
     fun `Given both cat name and cat age, When OnCatNameChanged or OnCatAgeChanged, then assert that isContinueButtonEnable is true`() =
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = mockCatProfileViewState.copy(
                 catName = "Cat",

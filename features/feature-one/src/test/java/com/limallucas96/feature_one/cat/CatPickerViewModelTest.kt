@@ -15,8 +15,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
 class CatPickerViewModelTest :
@@ -49,7 +47,7 @@ class CatPickerViewModelTest :
 
     @Test
     fun `Given a success api call to get cats, when ButtonShortNewCat or Retry are dispatched, then assert view state is loading`() {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = testViewState.copy(isLoading = true),
             actions = listOf(CatPickerAction.ButtonShortNewCat),
@@ -60,7 +58,7 @@ class CatPickerViewModelTest :
 
     @Test
     fun `Given a success api call to get cats, when ButtonShortNewCat or Retry are dispatched, then assert view state is not loading and has a cat url`() {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = testViewState.copy(catUrlPhoto = "url"),
             actions = listOf(CatPickerAction.ButtonShortNewCat),
@@ -71,7 +69,7 @@ class CatPickerViewModelTest :
 
     @Test
     fun `Given a failure api call to get cats, when ButtonShortNewCat or Retry are dispatched, then assert view state is error set to true`() {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = testViewState.copy(isError = true),
             actions = listOf(CatPickerAction.ButtonShortNewCat),
@@ -82,7 +80,7 @@ class CatPickerViewModelTest :
 
     @Test
     fun `Given a success api call to get cats, when OnCreate is dispatched, then assert view state is loading set to true`() {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = testViewState.copy(isLoading = true, catName = "name", catAge = "123"),
             actions = listOf(CatPickerAction.OnCreate(catName = "name", catAge = "123")),
@@ -93,7 +91,7 @@ class CatPickerViewModelTest :
 
     @Test
     fun `Given a success api call to get cats, when OnCreate is dispatched, then assert view state have all expected values`() {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = testViewState.copy(catName = "name", catAge = "123", catUrlPhoto = "url"),
             actions = listOf(CatPickerAction.OnCreate(catName = "name", catAge = "123")),
@@ -104,7 +102,7 @@ class CatPickerViewModelTest :
 
     @Test
     fun `Given a failure api call to get cats, when OnCreate is dispatched, then assert view state have all expected values`() {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = testViewState.copy(isError = true, catName = "name", catAge = "123"),
             actions = listOf(CatPickerAction.OnCreate(catName = "name", catAge = "123")),

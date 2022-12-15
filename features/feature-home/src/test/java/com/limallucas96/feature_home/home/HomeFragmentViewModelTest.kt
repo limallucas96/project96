@@ -46,7 +46,7 @@ class HomeFragmentViewModelTest :
 
     @Test
     fun `Given a success getPets call and abtest showLastPet set to true, when view dispatches OnCreate action to viewModel, then assert view state`() {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = HomeFragmentViewState("pet counter: 1", "Last pet created: pet", true),
             actions = listOf(HomeFragmentAction.OnCreate),
@@ -60,7 +60,7 @@ class HomeFragmentViewModelTest :
 
     @Test
     fun `Given a success getPets call and abtest showLastPet set to false, when view dispatches OnCreate action to viewModel, then assert view state`() {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = HomeFragmentViewState("pet counter: 1", "Last pet created: pet", false),
             actions = listOf(HomeFragmentAction.OnCreate),
@@ -74,7 +74,7 @@ class HomeFragmentViewModelTest :
 
     @Test
     fun `Given a fail getPets call, when view dispatches OnCreate action to viewModel, then assert view state`() {
-        tempAssertViewState(
+        assertViewState(
             dispatcher = coroutinesTestRule.testDispatcherProvider,
             expectedViewState = HomeFragmentViewState(
                 petCounter = "We could not retrieve any pet from our database",
