@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.limallucas96.core_presentation.mvi.BaseMVINavigationActivity
 import com.limallucas96.feature_home.home.HomeFragment
-import com.limallucas96.navigator.featurehome.FeatureHomeNavigator
 import com.limallucas96.navigator.fragment.FragmentNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

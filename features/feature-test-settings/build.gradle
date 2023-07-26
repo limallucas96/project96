@@ -1,0 +1,10 @@
+apply from: "$rootDir/common-android-library.gradle"
+apply from: "$rootDir/common-feature-modules.gradle"
+apply from: "$rootDir/common-feature-dependencies.gradle"
+apply from: "$rootDir/common-unit-test-dependencies.gradle"
+apply plugin: 'dagger.hilt.android.plugin'
+
+dependencies {
+    /** Add any particular dependency for this module here **/
+    implementation project(path: ':libraries:abtest')
+}

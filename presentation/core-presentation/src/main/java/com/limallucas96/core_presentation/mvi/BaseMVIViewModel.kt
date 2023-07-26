@@ -15,7 +15,7 @@ abstract class BaseMVIViewModel<UserAction : ViewAction, UIViewState : ViewState
 
     private val currentState: UIViewState get() = viewState.value
 
-    private val _viewState: MutableStateFlow<UIViewState> = MutableStateFlow(initialViewState)
+     val _viewState: MutableStateFlow<UIViewState> = MutableStateFlow(initialViewState)
     val viewState = _viewState.asStateFlow()
 
     private val _action: MutableSharedFlow<UserAction> = MutableSharedFlow()

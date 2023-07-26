@@ -22,6 +22,7 @@
       <module name="MVI96.feature-two" target="11" />
       <module name="MVI96.features.feature-home" target="11" />
       <module name="MVI96.features.feature-one" target="11" />
+      <module name="MVI96.features.feature-test-settings" target="11" />
       <module name="MVI96.features.feature-two" target="11" />
       <module name="MVI96.libraries.abtest" target="11" />
       <module name="MVI96.libraries.analytics" target="11" />

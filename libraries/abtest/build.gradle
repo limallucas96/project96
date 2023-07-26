@@ -3,11 +3,14 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 dependencies {
 
+    implementation project(path: ':core:core-sharedpreferences')
+
     //Hilt
     implementation rootProject.libraries.hiltAndroid
     kapt rootProject.libraries.hiltCompiler
 
     implementation rootProject.libraries.androidXCoreKtx
+    implementation rootProject.libraries.firebaseRemoteConfig
 
     testImplementation rootProject.libraries.junit
     androidTestImplementation rootProject.libraries.androidXJunit

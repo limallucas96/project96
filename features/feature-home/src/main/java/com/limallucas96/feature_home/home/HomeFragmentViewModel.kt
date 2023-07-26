@@ -9,6 +9,7 @@ import com.limallucas96.core_presentation.resourceprovider.ResourcesProvider
 import com.limallucas96.feature_home.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

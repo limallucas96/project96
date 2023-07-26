@@ -37,6 +37,7 @@ ext.versions = [
         kotlinCore              : '1.7.10',
 
         mockk                   : '1.13.3',
+        firebaseRemoteConfig    : '21.3.0'
 ]
 
 ext.libraries = [
@@ -87,6 +88,9 @@ ext.libraries = [
         mockk                   : "io.mockk:mockk:$versions.mockk",
         mockkAndroid            : "io.mockk:mockk-android:$versions.mockk",
         mockkAgent              : "io.mockk:mockk-agent:$versions.mockk",
+
+
+        firebaseRemoteConfig    : "com.google.firebase:firebase-config-ktx:$versions.firebaseRemoteConfig"
 
 ]
 
