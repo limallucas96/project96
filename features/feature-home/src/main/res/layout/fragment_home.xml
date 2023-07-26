@@ -10,12 +10,36 @@
     android:orientation="vertical"
     tools:context=".entrypoint.FeatureHomeEntryPointActivity">
 
+    <com.canhub.cropper.CropImageView
+        android:id="@+id/cropImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/selectedPhotos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="32dp"
+        android:textSize="16sp"
+        android:text="Selected photos" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:itemCount="20"
+        android:orientation="horizontal"
+        tools:listitem="@layout/crop_view_holder"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
     <com.limallucas96.uikit.views.MyButton
         android:id="@+id/button_featureOne"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Navigate to feature one"
+        android:text="Pick image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,11 +50,29 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Navigate to feature two"
+        android:text="Crop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/croppedPhotod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="32dp"
+        android:textSize="16sp"
+        android:text="Cropped photos to be sent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewResult"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:itemCount="20"
+        android:orientation="horizontal"
+        tools:listitem="@layout/crop_view_holder"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
 
     <TextView
         android:id="@+id/textView_petCounter"
@@ -38,16 +80,17 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="32dp"
+        android:visibility="gone"
         android:textSize="16sp"
         tools:text="Pet counter" />
 
     <TextView
-        android:id="@+id/textView_lastCat"
+        android:id="@+id/textView_upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="32dp"
         android:textSize="16sp"
-        tools:text="Last cat" />
+        android:text="Upload" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -20,7 +20,9 @@
         <entry key="feature-one/src/main/res/layout/fragment_pet_profile.xml" value="0.25" />
         <entry key="feature-two/src/main/res/layout/activity_feature_two.xml" value="0.16510416666666666" />
         <entry key="feature-two/src/main/res/xml/menu.xml" value="0.1640625" />
-        <entry key="features/feature-home/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="features/feature-home/src/main/res/layout/activity_feature_home_entry_point.xml" value="0.1716485507246377" />
+        <entry key="features/feature-home/src/main/res/layout/crop_view_holder.xml" value="0.25729166666666664" />
+        <entry key="features/feature-home/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="features/feature-one/src/main/res/layout/fragment_cat_picker.xml" value="0.1" />
         <entry key="features/feature-one/src/main/res/layout/fragment_cat_profile.xml" value="0.1" />
         <entry key="features/feature-one/src/main/res/layout/fragment_cat_summary.xml" value="0.1" />
